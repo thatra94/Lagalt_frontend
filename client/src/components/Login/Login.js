@@ -1,8 +1,17 @@
 import Keycloak from "../../constants/Keycloak";
+import { useEffect } from "react";
+import { userFetchingByIdAction } from "../../store/actions/userActions";
+
 import { useKeycloak } from "@react-keycloak/web";
+import { useDispatch, useSelector } from "react-redux";
 
 export function Login() {
   const { keycloak } = useKeycloak();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userFetchingByIdAction(1));
+  }, []);
 
   return (
     <div>
@@ -20,8 +29,6 @@ export function Login() {
           </a>
         </li>
       )}
-      <div>({keycloak.idToken}) </div>
-      <div>({keycloak.token}) </div>
     </div>
   );
 }

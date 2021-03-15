@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Keycloak from "./constants/Keycloak";
 import { Main } from "./Main/Main";
-import { Profile } from "./Profile/Profile";
+import { Profile } from "./components/Profile/Profile";
 import { Project } from "./components/Project/Project";
 import { ProjectSettings } from "./components/ProjectSettings/ProjectSettings";
 import { ReactKeycloakProvider } from "@react-keycloak/web";

@@ -1,8 +1,7 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { Navbar } from "../Navbar/Navbar";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export function Profile() {
   const { keycloak } = useKeycloak();

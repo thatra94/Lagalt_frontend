@@ -8,7 +8,6 @@ import { Project } from "./components/Project/Project";
 import { ProjectSettings } from "./components/ProjectSettings/ProjectSettings";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import { PrivateRoute } from "./utilities/PrivateRoute";
-import { ProtectedRoute } from "./utilities/ProtectedRoute";
 
 export const App = () => {
   return (

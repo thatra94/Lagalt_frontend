@@ -1,12 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import Keycloak from "./constants/Keycloak";
 import { Main } from "./Main/Main";
 import { Profile } from "./Profile/Profile";
-import { Project } from "./Project/Project";
+import { Project } from "./components/Project/Project";
+import { ProjectSettings } from "./components/ProjectSettings/ProjectSettings";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import Keycloak from "./constants/Keycloak";
 import { PrivateRoute } from "./utilities/PrivateRoute";
+import { ProtectedRoute } from "./utilities/ProtectedRoute";
 
 export const App = () => {
   return (
@@ -18,6 +20,10 @@ export const App = () => {
           <Switch>
             <Route exact path="/" component={Main} />
             <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute
+              path="/project/:id/settings"
+              component={ProjectSettings}
+            />
             <Route path="/project/:id" component={Project} />
             <Route path="/" render={() => <div>404</div>} />
           </Switch>

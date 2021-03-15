@@ -1,18 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { Navbar } from "../components/Navbar/Navbar";
 
-
-export const Main = (props) => {
-    return (
-      <div>
-        <h2>main</h2>        
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        <li onClick={() => {
-            props.history.push('/project/4')
-        }}>
-          Project
-        </li>
-      </div>
-    );
-  }
+export const Main = () => {
+  return (
+    <div>
+      <Navbar></Navbar>
+    </div>
+  );
+};

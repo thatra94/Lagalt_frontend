@@ -20,6 +20,8 @@ export function Login() {
           </a>
         </li>
       )}
+      <div>({keycloak.idToken}) </div>
+      <div>({keycloak.token}) </div>
     </div>
   );
 }

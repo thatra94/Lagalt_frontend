@@ -27,7 +27,7 @@ export function ProjectBannerItem({ project }) {
             </ListItemAvatar>    
             <div className="flexColumnContainer">
             <MainBannerItemText project={project}></MainBannerItemText>
-            <MainProjectSkills skills={[{ name: "skill1" }, { name: "skills2" }]}></MainProjectSkills>
+            <MainProjectSkills skills={[{ name: "skill1" }, { name: "skills2" },{ name: "skill3" },{ name: "skill4" },{ name: "skill5" }]}></MainProjectSkills>
             </div>
         </ListItem>
     )    

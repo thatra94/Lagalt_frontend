@@ -1,5 +1,12 @@
 import { API_BASE_URL } from "../constants/API";
-
+export const fetchProjects = () => {  
+  const res = fetch(`${ API_BASE_URL }/projects`)
+        .then(response => response.json())
+        .then(response => response.data)
+  console.log(res)
+  return res;
+}
+     /*
 export const fetchProjects = () => {
     return [
         {
@@ -66,10 +73,5 @@ export const fetchProjects = () => {
           "status": "Under utvikling",
           "industryId": 3
         }
-      ];   
-  /*  fetch(`${ API_BASE_URL }/projects`)
-        .then(response => response.json())
-        .then(response => response.data)
-        .then(response => {return response;})*/ 
-
-}
+      ];  
+}*/

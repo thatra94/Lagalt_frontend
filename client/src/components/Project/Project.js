@@ -1,4 +1,4 @@
-import { NavBar } from "../../Main/NavBar";
+import { Navbar } from "../navbar/Navbar";
 
 import {useHistory} from 'react-router-dom';
 export const Project = (props) => {
@@ -6,7 +6,7 @@ export const Project = (props) => {
 
     return (
       <div>
-        <NavBar history={history}></NavBar>
+        <Navbar history={history}></Navbar>
         <h2>Project</h2>
   
       </div>

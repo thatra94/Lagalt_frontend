@@ -1,10 +1,11 @@
 import { useKeycloak } from "@react-keycloak/web";
-import { Navbar } from "../Navbar/Navbar";
+import { Navbar } from "../navbar/Navbar";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 export function Profile() {
   const { keycloak } = useKeycloak();
+  const history = useHistory();
 
   const { userId } = useParams();
   const { error, user } = useSelector((state) => state.userReducer);
@@ -12,7 +13,7 @@ export function Profile() {
 
   return (
     <div>
-      <Navbar></Navbar>
+      <Navbar history={history}></Navbar>
       <h2>profile</h2>
       <span>username ({keycloak.tokenParsed.preferred_username})</span>
       <div> idtoken ({keycloak.idToken}) </div>

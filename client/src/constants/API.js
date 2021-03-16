@@ -1,1 +1,1 @@
-export const API_BASE_URL = "https://noroff-movie-catalogue.herokuapp.com/v1";
+export const API_BASE_URL = "https://localhost:44349/api";

@@ -15,8 +15,6 @@ export const App = () => {
     <ReactKeycloakProvider authClient={Keycloak}>
       <BrowserRouter>
         <div className="App">
-          <Link to="/">Main</Link>
-          <img src={logo} className="App-logo" alt="logo" />
           <Switch>
             <Route exact path="/" component={Main} />
             <PrivateRoute path="/profile" component={Profile} />

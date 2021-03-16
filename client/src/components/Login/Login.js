@@ -2,10 +2,11 @@ import { useEffect, useRef } from "react";
 import {
   userFetchingByIdAction,
   userSetByIdAction,
+  userFetchingByUserIdAction,
 } from "../../store/actions/userActions";
 import { useKeycloak } from "@react-keycloak/web";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "./LoginAPI";
+import { postUser } from "./LoginAPI";
 
 export function Login() {
   const { keycloak } = useKeycloak();
@@ -14,22 +15,31 @@ export function Login() {
   const didMount = useRef(false);
   const { user } = useSelector((state) => state.userReducer);
 
-  // on authenticated
-  // Check if user exists in database
-  // else create user
   useEffect(() => {
     // make useffect only render if authenticated is changed and not on mount
     if (didMount.current) {
-      dispatch(userFetchingByIdAction(0));
-      if (user === null) {
-        let keycloakUser = {
-          name: keycloak.subject,
-        };
-        dispatch(userSetByIdAction(keycloakUser));
-        createUser(keycloakUser);
-      }
+      console.log(keycloak.subject);
+      checkIfUserExist();
     } else didMount.current = true;
   }, [authenticated]);
+
+  const createUser = () => {
+    keycloak.loadUserProfile().then((profile) => {
+      let keycloakUser = {
+        name: profile.firstName,
+        userId: keycloak.subject,
+      };
+      dispatch(userSetByIdAction(keycloakUser));
+      postUser(keycloakUser);
+    });
+  };
+
+  const checkIfUserExist = async () => {
+    let users = await dispatch(userFetchingByUserIdAction(keycloak.subject));
+    if (users === null) {
+      createUser();
+    }
+  };
 
   return (
     <div>

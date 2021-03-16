@@ -12,7 +12,19 @@ export const fetchUserById = (userId) => {
     });
 };
 
-export const createUser = (user) => {
+export const fetchUserByUserId = (userId) => {
+  return fetch(`${API_BASE_URL}/users/${userId}`)
+    .then((r) => r.json())
+    .then((r) => r.data)
+    .then((user) => {
+      if (!user) {
+        throw new Error("Could not find user with id " + userId);
+      }
+      return user;
+    });
+};
+
+export const postUser = (user) => {
   return fetch(`${API_BASE_URL}/users`, {
     method: "POST",
     headers: {

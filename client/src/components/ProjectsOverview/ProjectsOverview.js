@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Navbar } from "../navbar/Navbar";
+import { Navbar } from "../Navbar/Navbar";
 import { ProjectBanners } from "./ProjectBanner/ProjectsBanners";
 import { Container } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import { Navbar } from "../navbar/Navbar";
+import { Navbar } from "../Navbar/Navbar";
 
 import {useHistory} from 'react-router-dom';
 export const Project = (props) => {

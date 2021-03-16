@@ -3,7 +3,7 @@ import {
   projectsErrorAction,
   projectsSetAction,
 } from "../actions/projectsActions";
-import {fetchProjects} from "../../Main/ProjectsAPI"
+import {fetchProjects} from "../../components/ProjectsOverview/ProjectsOverviewAPI"
 
 export const projectsMiddleware = ({ getState, dispatch }) => next => action => {
 

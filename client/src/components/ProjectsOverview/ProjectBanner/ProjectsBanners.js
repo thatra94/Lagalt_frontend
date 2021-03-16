@@ -1,7 +1,7 @@
 import { ProjectBannerItem } from './ProjectBannerItem';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProjects } from '../ProjectsAPI';
+import { fetchProjects } from '../ProjectsOverviewAPI';
 import React from 'react';
 import { Button, ButtonGroup,Container } from '@material-ui/core';
 import List from '@material-ui/core/List';

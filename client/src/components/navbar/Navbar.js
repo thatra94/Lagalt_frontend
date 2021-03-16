@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { Search } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import { HomeButton } from '../../Main/HomeButton'
+import { HomeButton } from './HomeButton'
 import { Link } from 'react-router-dom';
 import { Login } from '../Login/Login'
 

@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { Navbar } from "../components/navbar/Navbar";
+import { Navbar } from "../navbar/Navbar";
 import { ProjectBanners } from "./ProjectBanner/ProjectsBanners";
 import { Container } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { projectsFetchingAction } from "../store/actions/projectsActions";
-import {fetchProjects } from "./ProjectsAPI"
+import { projectsFetchingAction } from "../../store/actions/projectsActions";
+import {fetchProjects } from "./ProjectsOverviewAPI"
 
-export const Main = () => {
+export const ProjectsOverview = () => {
   const history = useHistory();
 
   const dispatch = useDispatch()

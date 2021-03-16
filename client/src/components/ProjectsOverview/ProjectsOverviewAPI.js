@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../constants/API";
+import { API_BASE_URL } from "../../constants/API";
 export const fetchProjects = () => {  
   const res = fetch(`${ API_BASE_URL }/projects`)
         .then(response => response.json())

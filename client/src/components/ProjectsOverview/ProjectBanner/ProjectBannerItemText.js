@@ -1,5 +1,5 @@
 import { ListItemAvatar, ListItemText,makeStyles,Avatar, Container } from '@material-ui/core';
-import { MainProjectSkills } from './MainProjectSkills';
+import { MainProjectSkills } from './ProjectBannerSkills';
 
 export const MainBannerItemText = ({project}) => {
     const classes = useStyles()

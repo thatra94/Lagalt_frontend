@@ -1,8 +1,8 @@
 import { useHistory } from 'react-router-dom'
 import List from '@material-ui/core/List';
 import { ListItem, ListItemAvatar, ListItemText,makeStyles,Avatar } from '@material-ui/core';
-import {MainBannerItemText} from './MainBannerItemText';
-import { MainProjectSkills } from './MainProjectSkills';
+import {MainBannerItemText} from './ProjectBannerItemText';
+import { MainProjectSkills } from './ProjectBannerSkills';
 
 export function ProjectBannerItem({ project }) {
     const Classes = useStyles();

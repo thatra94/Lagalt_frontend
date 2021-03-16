@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import Keycloak from "./constants/Keycloak";
-import { Main } from "./Main/Main";
+import { ProjectsOverview } from "./components/ProjectsOverview/ProjectsOverview";
 import { Profile } from "./components/Profile/Profile";
 import { Project } from "./components/Project/Project";
 import { ProjectSettings } from "./components/ProjectSettings/ProjectSettings";
@@ -15,7 +15,7 @@ export const App = () => {
       <BrowserRouter>
         <div className="App">
           <Switch>
-            <Route exact path="/" component={Main} />
+            <Route exact path="/" component={ProjectsOverview} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute
               path="/project/:id/settings"

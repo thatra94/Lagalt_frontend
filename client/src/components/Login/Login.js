@@ -13,17 +13,15 @@ export function Login() {
   const dispatch = useDispatch();
   let authenticated = keycloak.authenticated;
   const didMount = useRef(false);
-  const { user } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     // make useffect only render if authenticated is changed and not on mount
     if (didMount.current) {
-      console.log(keycloak.subject);
-      checkIfUserExist();
+      setUser();
     } else didMount.current = true;
   }, [authenticated]);
 
-  const createUser = () => {
+  const setUser = () => {
     keycloak.loadUserProfile().then((profile) => {
       let keycloakUser = {
         name: profile.firstName,
@@ -34,12 +32,20 @@ export function Login() {
     });
   };
 
-  const checkIfUserExist = async () => {
-    let users = await dispatch(userFetchingByUserIdAction(keycloak.subject));
-    if (users === null) {
-      createUser();
-    }
-  };
+  // const checkIfUserExist = async () => {
+  //   let user = await keycloak.loadUserProfile().then((id) => {
+  //     dispatch(userFetchingByUserIdAction(id)).then((users) => {
+  //       if (users === null || typeof user === "undefined") {
+  //         createUser();
+  //       }
+  //     });
+  //   });
+  //   // let user = await keycloak.subject.then((id) => {
+  //   //   dispatch(userFetchingByUserIdAction(id));
+  //   // });
+  //   //let user = await dispatch(userFetchingByUserIdAction(userId));
+  //   console.log(user);
+  // };
 
   return (
     <div>

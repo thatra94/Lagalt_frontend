@@ -1,19 +1,14 @@
 import { ProjectBannerItem } from './ProjectBannerItem';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProjects } from '../ProjectsOverviewAPI';
+import {  useSelector } from "react-redux";
 import React from 'react';
 import { Button, ButtonGroup,Container } from '@material-ui/core';
 import List from '@material-ui/core/List';
 
 export const ProjectBanners = () => {
-  //  const projects = fetchProjects();
     const industries = ["All", "Webutvikling", "Musikk","Spillutvikling","Film","Animasjon","Foto"]
 
-  //  const { fetching, error } = useSelector( state => state.projectsReducer )
-    const { projects } = useSelector( state => state.projectsReducer )
+    const { projects } = useSelector( state => state.projectsOverviewReducer )
    
-
     return (
         <Container>            
         <ButtonGroup color="secondary" aria-label="outlined primary button group">

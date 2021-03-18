@@ -1,21 +1,19 @@
-import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
 import { ProjectBanners } from "./ProjectBanner/ProjectsBanners";
 import { Container } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { projectsFetchingAction } from "../../store/actions/projectsActions";
-import {fetchProjects } from "./ProjectsOverviewAPI"
+import { projectsOverviewFetchingAction } from "../../store/actions/projectsOverviewActions";
 
 export const ProjectsOverview = () => {
   const history = useHistory();
 
   const dispatch = useDispatch()
-  const { fetching, error } = useSelector(state => state.projectsReducer)
+  const { fetching, error } = useSelector(state => state.projectsOverviewReducer)
 
   useEffect(() => {
-    dispatch(projectsFetchingAction())
+    dispatch(projectsOverviewFetchingAction())
   }, [dispatch])
 
   return (

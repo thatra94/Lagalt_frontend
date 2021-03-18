@@ -1,8 +1,8 @@
 import {
-  ACTION_PROJECTS_FETCHING,
-  ACTION_PROJECTS_ERROR,
-  ACTION_PROJECTS_SET,
-} from "../actions/projectsActions";
+  ACTION_PROJECTS_OVERVIEW_FETCHING,
+  ACTION_PROJECTS_OVERVIEW_ERROR,
+  ACTION_PROJECTS_OVERVIEW_SET,
+} from "../actions/projectsOverviewActions";
 
 const initialState = {
   projects: [],
@@ -10,23 +10,23 @@ const initialState = {
   fetching: false,
 };
 
-export function projectsReducer(state = initialState, action) {
+export function projectsOverviewReducer(state = initialState, action) {
   switch (action.type) {
-    case ACTION_PROJECTS_FETCHING:
+    case ACTION_PROJECTS_OVERVIEW_FETCHING:
       return {
         ...state,
         fetching: true,
         error: '',
       };
 
-    case ACTION_PROJECTS_SET:
+    case ACTION_PROJECTS_OVERVIEW_SET:
       return {
         error: '',
         fetching: false,
         projects: action.payload
       }
 
-    case ACTION_PROJECTS_ERROR:
+    case ACTION_PROJECTS_OVERVIEW_ERROR:
       return {
         ...state,
         fetching: false,

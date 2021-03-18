@@ -8,20 +8,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import { HomeButton } from './HomeButton'
 import { Link } from 'react-router-dom';
 import { Login } from '../Login/Login'
+import { useHistory } from 'react-router-dom';
+
 
 export const Navbar = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   return (
     <div>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <HomeButton history={props.history} />
-          <Container className={classes.search}>
-            <div className={classes.searchIcon}>
-              <Search />
-            </div>
+          <HomeButton/>
+          <Container className={classes.search}>            
             <InputBase
-              placeholder="Search…"
+              placeholder="Search for projects…"
               className={
                 classes.inputInput
               }
@@ -33,11 +33,11 @@ export const Navbar = (props) => {
           </li>
           <li
             onClick={() => {
-              props.history.push("/project/4");
+              history.push("/project/4");
             }}
           >
             Project
-      </li>
+          </li>
           <Login></Login>
         </Toolbar>
       </AppBar>
@@ -62,24 +62,25 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   search: {
+    
+    padding: theme.spacing(0, 2),
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: theme.palette.common.white,
     width: 'auto'
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: theme.palette.common.black,
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {

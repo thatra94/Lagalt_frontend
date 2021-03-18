@@ -1,21 +1,26 @@
-import { ListItemAvatar,Chip , ListItemText,makeStyles,Avatar, Container } from '@material-ui/core';
+import { Chip, makeStyles, Container } from '@material-ui/core';
 
 export function MainProjectSkills({ skills }) {
     const classes = useStyles()
     return (
         <Container className={classes.root}>
-        {skills.map(skill => {
-            return skill.name == "skills2" ? <Chip color="secondary" key={skill.name} label={skill.name}/> : <Chip key={skill.name} label={skill.name}/>
-         }
-        )}
-        
+            <h5>Project Skills: </h5>
+            {skills.map(skill => {
+                return <Chip className={classes.skills} variant="outlined" color="primary" key={skill.name} label={skill.name} />
+            }
+            )}
         </Container>
-        )    
+    )
 }
 
-const useStyles = makeStyles((theme) =>({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
         width: '100%',
+        alignItems: "center",
+    },
+    skills: {
+        padding: theme.spacing(2),
+        marginLeft: theme.spacing(2),
     }
 }));

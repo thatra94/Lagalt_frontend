@@ -7,7 +7,7 @@ import { Search } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { HomeButton } from './HomeButton'
 import { Link } from 'react-router-dom';
-import { Login } from '../Login/Login'
+import { Login } from '../../Login/Login'
 import { useHistory } from 'react-router-dom';
 
 

@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import { ListItem, ListItemAvatar, makeStyles,Avatar } from '@material-ui/core';
 import {MainBannerItemText} from './ProjectBannerItemText';
-import { MainProjectSkills } from './ProjectBannerSkills';
+import { ProjectBannerSkills } from './ProjectBannerSkills';
 
 export function ProjectBannerItem({ project }) {
     const Classes = useStyles();
@@ -26,9 +26,9 @@ export function ProjectBannerItem({ project }) {
                     src={project.imageUrl}
                 />
             </ListItemAvatar>    
-            <div className="flexColumnContainer">
+            <div>
             <MainBannerItemText project={project}></MainBannerItemText>
-            <MainProjectSkills skills={project.skills}></MainProjectSkills>
+            <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
             </div>
         </ListItem>
     )    

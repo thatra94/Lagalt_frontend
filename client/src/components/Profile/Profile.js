@@ -1,5 +1,5 @@
 import { useKeycloak } from "@react-keycloak/web";
-import { Navbar } from "../Navbar/Navbar";
+import { Navbar } from "../Shared/Navbar/Navbar";
 import { useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 

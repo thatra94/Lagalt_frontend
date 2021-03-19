@@ -1,12 +1,13 @@
-import { Chip, makeStyles, Container } from '@material-ui/core';
-
+import { makeStyles, Container } from '@material-ui/core';
+import { Skill } from "../Skill"
 export function ProjectBannerSkills({ skills }) {
     const classes = useStyles()
     return (
         <Container className={classes.root}>
             <h5>Skills: </h5>
+            
             {skills.map(skill => {
-                return <Chip className={classes.skills} variant="outlined" color="primary" key={skill.name} label={skill.name} />
+                return <Skill skill={skill}/>
             }
             )}
         </Container>
@@ -18,9 +19,5 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         width: '100%',
         alignItems: "center",
-    },
-    skills: {
-        padding: theme.spacing(2),
-        marginLeft: theme.spacing(2),
     }
 }));

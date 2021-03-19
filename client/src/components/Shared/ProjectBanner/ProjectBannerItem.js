@@ -26,7 +26,7 @@ export function ProjectBannerItem({ project }) {
                     src={project.imageUrl}
                 />
             </ListItemAvatar>    
-            <div className="flexColumnContainer">
+            <div>
             <MainBannerItemText project={project}></MainBannerItemText>
             <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
             </div>

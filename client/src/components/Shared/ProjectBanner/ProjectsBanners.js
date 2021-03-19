@@ -1,12 +1,10 @@
 import { ProjectBannerItem } from './ProjectBannerItem';
 import {  useSelector } from "react-redux";
 import React from 'react';
-import { Button, ButtonGroup,Container } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 
-export const ProjectBanners = () => {
-    
+export const ProjectBanners = () => {  
 
     const { projects } = useSelector( state => state.projectsOverviewReducer )
    

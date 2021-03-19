@@ -3,24 +3,21 @@ import {  useSelector } from "react-redux";
 import React from 'react';
 import { Button, ButtonGroup,Container } from '@material-ui/core';
 import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
 
 export const ProjectBanners = () => {
-    const industries = ["All", "Webutvikling", "Musikk","Spillutvikling","Film","Animasjon","Foto"]
+    
 
     const { projects } = useSelector( state => state.projectsOverviewReducer )
    
-    return (
-        <Container>            
-        <ButtonGroup color="secondary" aria-label="outlined primary button group">
-            {industries.map(industry =><Button key={industry}>{industry}</Button> )}
-        </ButtonGroup>
-        <List>
-           
+    return (    
+        <Paper > 
+        <List style={{padding: 0}}>           
             {projects ? projects.map(project =>
-                <ProjectBannerItem project={project} key={project.id}></ProjectBannerItem>
+             <ProjectBannerItem project={project} key={project.id}></ProjectBannerItem>
             ) : null}
         </List>
-        </Container>       
+        </Paper>       
     )
 }  
 /*  <ListItemText id={labelId} primary={project.name} secondary={project.status} />       

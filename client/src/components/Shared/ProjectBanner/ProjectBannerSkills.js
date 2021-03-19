@@ -1,10 +1,10 @@
 import { Chip, makeStyles, Container } from '@material-ui/core';
 
-export function MainProjectSkills({ skills }) {
+export function ProjectBannerSkills({ skills }) {
     const classes = useStyles()
     return (
         <Container className={classes.root}>
-            <h5>Project Skills: </h5>
+            <h5>Skills: </h5>
             {skills.map(skill => {
                 return <Chip className={classes.skills} variant="outlined" color="primary" key={skill.name} label={skill.name} />
             }

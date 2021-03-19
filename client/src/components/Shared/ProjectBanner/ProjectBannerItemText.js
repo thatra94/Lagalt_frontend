@@ -11,7 +11,7 @@ export const MainBannerItemText = ({ project }) => {
                 {project.themes.map((theme) => {
                     return <Chip className={classes.theme} color="secondary" key={theme.name} label={theme.name} />
                 })}
-                <div style={{ marginLeft: "50px" }}><p>Prosject Status: {project.status}</p></div>
+                <div style={{ marginLeft: "50px" }}><p>Status: {project.status}</p></div>
             </div>
         </Container>)
 }

@@ -1,46 +1,53 @@
-import { useHistory } from 'react-router-dom'
-import { ListItem, ListItemAvatar, makeStyles,Avatar } from '@material-ui/core';
-import {MainBannerItemText} from './ProjectBannerItemText';
+import { useHistory } from 'react-router-dom';
+import {
+  ListItem,
+  ListItemAvatar,
+  makeStyles,
+  Avatar,
+  Container,
+} from '@material-ui/core';
+import { ProjectBannerItemHeader } from './ProjectBannerItemHeader';
 import { ProjectBannerSkills } from './ProjectBannerSkills';
 
 export function ProjectBannerItem({ project }) {
-    const Classes = useStyles();
-    const history = useHistory()
+  const Classes = useStyles();
+  const history = useHistory();
 
-    const onItemClick = () => {
-        history.push(`/project/${project.id}`)
-    }
+  const onItemClick = () => {
+    history.push(`/project/${project.id}`);
+  };
 
-    return (
-        <ListItem
-            className={Classes.listItem}
-            key={project.id}
-            button
-            divider
-            onClick={onItemClick}
-            alignItems="flex-start">
-            <ListItemAvatar >
-                <Avatar
-                    className={Classes.avatar}
-                    alt={`img for ${project.name}`}
-                    src={project.imageUrl}
-                />
-            </ListItemAvatar>    
-            <div>
-            <MainBannerItemText project={project}></MainBannerItemText>
-            <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
-            </div>
-        </ListItem>
-    )    
+  return (
+    <ListItem
+      className={Classes.listItem}
+      key={project.id}
+      button
+      divider
+      onClick={onItemClick}
+      alignItems="flex-start"
+    >
+      <ListItemAvatar>
+        <Avatar
+          className={Classes.avatar}
+          alt={`img for ${project.name}`}
+          src={project.imageUrl}
+        />
+      </ListItemAvatar>
+      <Container maxWidth="xl">
+        <ProjectBannerItemHeader project={project}></ProjectBannerItemHeader>
+
+        <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
+      </Container>
+    </ListItem>
+  );
 }
 
-const useStyles = makeStyles((theme) =>({
-    listItem: {
-        width: '100%',
-        height: '8em',
-    },
-    avatar: {
-        minWidth: '4em',
-        minHeight: '4em',
-    }
+const useStyles = makeStyles((theme) => ({
+  listItem: {
+    width: '100%',
+  },
+  avatar: {
+    minWidth: '4em',
+    minHeight: '4em',
+  },
 }));

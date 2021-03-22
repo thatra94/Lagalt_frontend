@@ -1,4 +1,4 @@
-import { makeStyles, Container } from '@material-ui/core';
+import { makeStyles, Container, Divider } from '@material-ui/core';
 import { Skill } from "../Skill"
 export function ProjectBannerSkills({ skills }) {
     const classes = useStyles()
@@ -16,6 +16,7 @@ export function ProjectBannerSkills({ skills }) {
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        padding: 0,
         display: "flex",
         width: '100%',
         alignItems: "center",

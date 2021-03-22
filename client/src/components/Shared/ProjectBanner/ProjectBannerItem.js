@@ -1,13 +1,12 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import {
   ListItem,
   ListItemAvatar,
   makeStyles,
   Avatar,
-  Container,
-} from '@material-ui/core';
-import { ProjectBannerItemHeader } from './ProjectBannerItemHeader';
-import { ProjectBannerSkills } from './ProjectBannerSkills';
+} from "@material-ui/core";
+import { MainBannerItemText } from "./ProjectBannerItemText";
+import { ProjectBannerSkills } from "./ProjectBannerSkills";
 
 export function ProjectBannerItem({ project }) {
   const Classes = useStyles();
@@ -33,21 +32,23 @@ export function ProjectBannerItem({ project }) {
           src={project.imageUrl}
         />
       </ListItemAvatar>
-      <Container maxWidth="xl">
-        <ProjectBannerItemHeader project={project}></ProjectBannerItemHeader>
-
-        <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
-      </Container>
+      <div>
+        <MainBannerItemText project={project}></MainBannerItemText>
+        {project.skills && (
+          <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
+        )}
+      </div>
     </ListItem>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
-    width: '100%',
+    width: "100%",
+    height: "8em",
   },
   avatar: {
-    minWidth: '4em',
-    minHeight: '4em',
+    minWidth: "4em",
+    minHeight: "4em",
   },
 }));

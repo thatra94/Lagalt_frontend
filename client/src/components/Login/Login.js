@@ -1,9 +1,5 @@
 import { useEffect, useRef } from "react";
-import {
-  userFetchingByIdAction,
-  userSetByIdAction,
-  userFetchingByUserIdAction,
-} from "../../store/actions/userActions";
+import { userSetByUserIdAction } from "../../store/actions/userActions";
 import { useKeycloak } from "@react-keycloak/web";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "./LoginAPI";
@@ -27,25 +23,12 @@ export function Login() {
         name: profile.firstName,
         userId: keycloak.subject,
       };
-      dispatch(userSetByIdAction(keycloakUser));
-      postUser(keycloakUser);
+      postUser(keycloakUser).then((result) => {
+        console.log(result);
+        dispatch(userSetByUserIdAction(result));
+      });
     });
   };
-
-  // const checkIfUserExist = async () => {
-  //   let user = await keycloak.loadUserProfile().then((id) => {
-  //     dispatch(userFetchingByUserIdAction(id)).then((users) => {
-  //       if (users === null || typeof user === "undefined") {
-  //         createUser();
-  //       }
-  //     });
-  //   });
-  //   // let user = await keycloak.subject.then((id) => {
-  //   //   dispatch(userFetchingByUserIdAction(id));
-  //   // });
-  //   //let user = await dispatch(userFetchingByUserIdAction(userId));
-  //   console.log(user);
-  // };
 
   return (
     <div>

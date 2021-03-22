@@ -10,34 +10,19 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { projectFetchingByIdAction } from '../../store/actions/projectActions';
 import { ProjectBannerTags } from '../Shared/ProjectBanner/ProjectBannerTags';
-export const ProjectMainContent = ({ project }) => {
+import { ProjectNewComment} from './ProjectNewComment';
+import { ProjectUserComments} from './ProjectUserComments';
+
+export const ProjectComments = ({ project }) => {
   const classes = useStyles();
   return (
     <Container>
-      <div className={classes.headerContainer}>
-        <div className={classes.header}>
-          <ProjectBannerTags project={project} />
-          <h1>{project.name}</h1>
-        </div>
-        <img height="150" src={project.imageUrl}></img>
-      </div>
-      <Divider />
-      <div>
-        <p>{project.description}</p>
-      </div>
-      <br/>
-      <div>
-        <h5>Project Links</h5> 
-        {project.links &&
-          project.links.map((link) => (
-            <Typography className={classes.root}>
-              <p> 
-              <a  target="_blank" href={link.url}>
-                {link.name}
-              </a></p>
-            </Typography>
-          ))}
-      </div>
+      <h5>Skriv en kommentar </h5>
+         
+      <ProjectNewComment/>  <div className={classes.headerContainer}>
+        <h3>Prosjekt Kommentarer </h3>
+      </div><Divider />
+      <ProjectUserComments/>
     </Container>
   );
 };

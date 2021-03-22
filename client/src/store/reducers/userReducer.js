@@ -42,7 +42,7 @@ export function userReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          skills: [...state.user.skills, action.payload],
+          skills: [...state.user.skills, { name: action.payload }],
         },
       };
 

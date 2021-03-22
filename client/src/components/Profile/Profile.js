@@ -2,7 +2,14 @@ import { useKeycloak } from "@react-keycloak/web";
 import { Navbar } from "../Shared/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { Container, Grid, Button, TextField, Paper } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Button,
+  TextField,
+  Paper,
+  Avatar,
+} from "@material-ui/core";
 import { ProfileProjects } from "./ProfileProjects/ProfileProjects";
 import { useState, useEffect } from "react";
 import { ProfileSkills } from "./ProfileSkills";
@@ -17,10 +24,13 @@ export function Profile() {
   const dispatch = useDispatch();
   const { error, user } = useSelector((state) => state.userReducer);
   console.log(user);
+  const Classes = useStyles();
 
   const [skill, setSkill] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
+    setDescription(user.description);
     dispatch(userProjectsFetchingByUserIdAction("example-token"));
   }, []);
 
@@ -33,6 +43,10 @@ export function Profile() {
     setSkill(event.target.value);
   };
 
+  const handleDescriptionChange = (event) => {
+    event.preventDefault();
+    setDescription(event.target.value);
+  };
   const saveChanges = () => {
     putUser(user);
   };
@@ -42,24 +56,27 @@ export function Profile() {
       <Navbar history={history}></Navbar>
       <Container fixed>
         <Grid container direction="row" justify="space-between" spacing={10}>
-          <Grid item xs={8} sm={8}>
-            <Button variant="contained" color="primary">
-              Add project to portfolio
-            </Button>
-            <h2>Projects</h2>
+          <Grid item xs={7} sm={7}>
+            <h2>Prosjekter</h2>
             <ProfileProjects></ProfileProjects>
           </Grid>
-          <Grid item xs={4} sm={4}>
+          <Grid item xs={5} sm={5}>
             {error && <p>{error}</p>}
             {user && (
               <>
+                <h2>Profil</h2>
                 <Paper elevation={3}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12} sm={12}>
-                      <p>{user.imageUrl}</p>
+                  <Grid container justify="center" spacing={3}>
+                    <Grid item>
+                      <Avatar
+                        className={Classes.avatar}
+                        alt={`img for ${user.name}`}
+                        src={user.imageUrl}
+                      />
+                    </Grid>
+                    <Grid justify="center" item xs={12} sm={12}>
                       <h1>{user.name}</h1>
                       <p>{user.id}</p>
-                      <p>{user.description}</p>
                     </Grid>
                     <Grid item xs={10} sm={10}>
                       <TextField
@@ -69,6 +86,8 @@ export function Profile() {
                         size="medium"
                         rows={6}
                         variant="outlined"
+                        value={description}
+                        onInput={handleDescriptionChange}
                         fullWidth
                       />
                     </Grid>
@@ -92,18 +111,25 @@ export function Profile() {
                         Legg til skill
                       </Button>
                     </Grid>
-                    <Grid item xs={10} sm={10}>
-                      <ProfileSkills skills={user.skills}></ProfileSkills>
+                    <Grid item xs={12} sm={12}>
+                      {user.skills && (
+                        <ProfileSkills
+                          skills={user.skills}
+                          className={Classes.skills}
+                        ></ProfileSkills>
+                      )}
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        onClick={saveChanges}
+                      >
+                        Lagre endringer
+                      </Button>
                     </Grid>
                   </Grid>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    onClick={saveChanges}
-                  >
-                    Lagre endringer
-                  </Button>
                 </Paper>
               </>
             )}
@@ -116,6 +142,13 @@ export function Profile() {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  skills: {
+    marginTop: theme.spacing(2),
+  },
+  avatar: {
+    minWidth: "6em",
+    minHeight: "6em",
   },
   // profileContainer: {
   //   box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.22);

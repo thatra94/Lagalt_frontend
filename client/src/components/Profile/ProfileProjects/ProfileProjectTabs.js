@@ -4,9 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-
 import Typography from "@material-ui/core/Typography";
-import { Box, Paper } from "@material-ui/core";
+import { Box, Paper, Button } from "@material-ui/core";
 import { ProfileProjectsTabPersonal } from "./ProfileProjectsTabPersonal";
 import { ProjectBanners } from "../../Shared/ProjectBanner/ProjectsBanners";
 import { useDispatch, useSelector } from "react-redux";
@@ -72,6 +71,9 @@ export function ProfileProjectTabs() {
           <ProjectBanners projects={projects} />
         </TabPanel>
         <TabPanel value={value} index={1}>
+          <Button variant="contained" color="primary">
+            Add project to portfolio
+          </Button>
           <ProfileProjectsTabPersonal></ProfileProjectsTabPersonal>
           <ProfileProjectsTabPersonal></ProfileProjectsTabPersonal>
           <ProfileProjectsTabPersonal></ProfileProjectsTabPersonal>

@@ -16,7 +16,7 @@ export const ProjectSidebar = ({ project }) => {
       <br />
       <Container>
         <Button
-          fullWidth="true"
+          fullWidth
           onClick={() => {
             alert('clicked');
           }}

@@ -1,5 +1,4 @@
 import { Navbar } from '../Shared/Navbar/Navbar';
-import { useParams, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ProjectSidebar } from './ProjectSidebar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,12 +8,15 @@ import { Paper, Grid, Container } from '@material-ui/core';
 import { ProjectMainContent } from './ProjectMainContent';
 import { ProjectComments } from './ProjectComments';
 
+import { commentFetchingByIdAction } from '../../store/actions/commentActions';
+
 
 export const Project = (props) => {
   const dispatch = useDispatch();
   const { fetching, error } = useSelector(
     (state) => state.projectsOverviewReducer
   );
+
   useEffect(() => {
     dispatch(projectFetchingByIdAction(props.match.params.id));
   }, [dispatch]);
@@ -24,24 +26,25 @@ export const Project = (props) => {
 
   return (
     <div>
+      {project && console.log(project.id)}
       <Navbar></Navbar>
       {error && <p>{error}</p>}
-      {project && (
+      {project && (        
         <Container className={classes.pageContentContainer} maxWidth="xl">
-          <Grid container justify="space-between" spacing={3}>
+          <Grid container justify="space-between" spacing={6}>
             <Grid item xs={12} md={8}>
               <Paper className={classes.paper}>
                 <ProjectMainContent project={project} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={4}>
               <Paper className={classes.paper}>
                 <ProjectSidebar project={project} />
               </Paper>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12} md={8}>
               <Paper className={classes.paper}><ProjectComments project={project}></ProjectComments></Paper>
-            </Grid>           
+            </Grid>      
           </Grid>
         </Container>
       )}
@@ -53,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
   pageContentContainer: {
     textAlign: 'start',
     maxWidth: 'xl',
+    paddingLeft: theme.spacing(8),
+    paddingRight: theme.spacing(8),
   },
   paper: {
     padding: theme.spacing(2),

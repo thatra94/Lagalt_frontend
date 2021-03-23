@@ -1,17 +1,15 @@
-import { useEffect } from 'react';
+
 import {
   Container,
   makeStyles,
-  Chip,
-  Divider,
-  Link,
-  Typography,
-} from '@material-ui/core';
+  Divider
+} from '@material-ui/core';/*
 import { useDispatch, useSelector } from 'react-redux';
-import { projectFetchingByIdAction } from '../../store/actions/projectActions';
+import { projectFetchingByIdAction } from '../../store/actions/projectActions';*/
 import { ProjectBannerTags } from '../Shared/ProjectBanner/ProjectBannerTags';
 export const ProjectMainContent = ({ project }) => {
   const classes = useStyles();
+
   return (
     <Container>
       <div className={classes.headerContainer}>
@@ -30,12 +28,9 @@ export const ProjectMainContent = ({ project }) => {
         <h5>Project Links</h5> 
         {project.links &&
           project.links.map((link) => (
-            <Typography className={classes.root}>
-              <p> 
-              <a  target="_blank" href={link.url}>
+              <a key={link.id} target="_blank" href={link.url}>
                 {link.name}
-              </a></p>
-            </Typography>
+              </a>
           ))}
       </div>
     </Container>

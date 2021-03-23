@@ -16,7 +16,11 @@ import { ProfileSkills } from "./ProfileSkills";
 import { makeStyles } from "@material-ui/core/styles";
 import { userAddSkill } from "../../store/actions/userActions";
 import { putUser } from "./ProfileAPI";
-import { userProjectsFetchingByUserIdAction } from "../../store/actions/userActions";
+
+import {
+  userProjectsFetchingByUserIdAction,
+  userPersonalProjectsFetchingByUserIdAction,
+} from "../../store/actions/userProjectsActions";
 
 export function Profile() {
   const { keycloak } = useKeycloak();
@@ -30,8 +34,11 @@ export function Profile() {
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    setDescription(user.description);
+    if (user.description != null) {
+      setDescription(user.description);
+    }
     dispatch(userProjectsFetchingByUserIdAction("example-token"));
+    dispatch(userPersonalProjectsFetchingByUserIdAction(keycloak.subject));
   }, []);
 
   const handleSubmit = () => {
@@ -56,11 +63,11 @@ export function Profile() {
       <Navbar history={history}></Navbar>
       <Container fixed>
         <Grid container direction="row" justify="space-between" spacing={10}>
-          <Grid item xs={7} sm={7}>
+          <Grid item xs={8} sm={8}>
             <h2>Prosjekter</h2>
             <ProfileProjects></ProfileProjects>
           </Grid>
-          <Grid item xs={5} sm={5}>
+          <Grid item xs={4} sm={4}>
             {error && <p>{error}</p>}
             {user && (
               <>
@@ -74,7 +81,7 @@ export function Profile() {
                         src={user.imageUrl}
                       />
                     </Grid>
-                    <Grid justify="center" item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12}>
                       <h1>{user.name}</h1>
                       <p>{user.id}</p>
                     </Grid>

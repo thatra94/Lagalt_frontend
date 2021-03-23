@@ -5,14 +5,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import { Box, Paper, Button } from "@material-ui/core";
-import { ProfileProjectsTabPersonal } from "./ProfileProjectsTabPersonal";
+import { Box, Paper, Button, Container } from "@material-ui/core";
+import { ProfileProjectsTabPersonalProjects } from "./ProfileProjectsTabPersonalProjects";
+import { ProfileProjectsTabPersonalAddButton } from "./ProfileProjectsTabPersonalAddButton";
 import { ProjectBanners } from "../../Shared/ProjectBanner/ProjectsBanners";
-import { useDispatch, useSelector } from "react-redux";
 
+import { useDispatch, useSelector } from "react-redux";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -23,7 +23,9 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <Container>
+            <Box>{children}</Box>
+          </Container>
         </Box>
       )}
     </div>
@@ -46,7 +48,7 @@ function a11yProps(index) {
 export function ProfileProjectTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const { error, projects } = useSelector((state) => state.userReducer);
+  const { error, projects } = useSelector((state) => state.userProjectsReducer);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,12 +73,8 @@ export function ProfileProjectTabs() {
           <ProjectBanners projects={projects} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Button variant="contained" color="primary">
-            Add project to portfolio
-          </Button>
-          <ProfileProjectsTabPersonal></ProfileProjectsTabPersonal>
-          <ProfileProjectsTabPersonal></ProfileProjectsTabPersonal>
-          <ProfileProjectsTabPersonal></ProfileProjectsTabPersonal>
+          <ProfileProjectsTabPersonalAddButton></ProfileProjectsTabPersonalAddButton>
+          <ProfileProjectsTabPersonalProjects></ProfileProjectsTabPersonalProjects>
         </TabPanel>
       </Paper>
     </div>

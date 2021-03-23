@@ -45,7 +45,6 @@ export function ProjectBannerItem({ project }) {
 const useStyles = makeStyles((theme) => ({
   listItem: {
     width: "100%",
-    height: "8em",
   },
   avatar: {
     minWidth: "4em",

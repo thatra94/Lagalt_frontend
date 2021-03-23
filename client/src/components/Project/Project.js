@@ -16,7 +16,6 @@ export const Project = (props) => {
   const { fetching, error } = useSelector(
     (state) => state.projectsOverviewReducer
   );
-
   useEffect(() => {
     dispatch(projectFetchingByIdAction(props.match.params.id));
   }, [dispatch]);

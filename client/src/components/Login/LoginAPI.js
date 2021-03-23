@@ -27,7 +27,7 @@ export const fetchUserByUserId = (userId) => {
 
 export const postUser = (user) => {
   try {
-    fetchUserByUserId(user.userId).then((users) => {
+    return fetchUserByUserId(user.userId).then((users) => {
       console.log(users);
       if (users === null)
         return fetch(`${API_BASE_URL}/users`, {
@@ -45,6 +45,7 @@ export const postUser = (user) => {
             return response.json();
           })
           .then((response) => response.data);
+      return users;
     });
   } catch (error) {
     console.log("Could not find user with useriId " + user.userId);

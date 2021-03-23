@@ -16,16 +16,6 @@ export const userSetByUserIdAction = (payload) => ({
   payload,
 });
 
-export const userProjectsFetchingByUserIdAction = (payload) => ({
-  type: ACTION_USER_PROJECTS_FETCH_BY_USERID,
-  payload,
-});
-
-export const userProjectsSetByUserIdAction = (payload) => ({
-  type: ACTION_USER_PROJECTS_SET_BY_USERID,
-  payload,
-});
-
 export const userAddSkill = (payload) => ({
   type: ACTION_USER_ADD_USER_SKILL,
   payload,

@@ -6,13 +6,21 @@ import Keycloak from "keycloak-js";
 //   "enable-cors": true,
 // };
 
-// Deployment
+//LocalClient
 const keycloakConfig = {
   url: "https://keycloakheroku.herokuapp.com/auth/",
   realm: "Lagalt",
   clientId: "lagaltClientLocal",
   "enable-cors": true,
 };
+
+// // Deployment
+// const keycloakConfig = {
+//   url: "https://keycloakheroku.herokuapp.com/auth/",
+//   realm: "Lagalt",
+//   clientId: "lagaltClient",
+//   "enable-cors": true,
+// };
 
 const keycloak = new Keycloak(keycloakConfig);
 export default keycloak;

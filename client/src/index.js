@@ -5,12 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import {
+  unstable_createMuiStrictModeTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 
+const theme = unstable_createMuiStrictModeTheme();
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

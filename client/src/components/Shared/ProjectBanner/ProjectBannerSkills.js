@@ -4,10 +4,10 @@ export function ProjectBannerSkills({ skills }) {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
-      <h5>Skills: </h5>
+      <span>Skills: </span>
 
-      {skills.map((skill) => {
-        return <Skill skill={skill} />;
+      {skills.map((skill, index) => {
+        return <Skill key={index} skill={skill} />;
       })}
     </Container>
   );

@@ -7,8 +7,8 @@ export function ProfileSkills({ skills }) {
     <span className={classes.root}>
       <h5>Skills: </h5>
 
-      {skills.map((skill) => {
-        return <Skill skill={skill} className={classes.skill} />;
+      {skills.map((skill, index) => {
+        return <Skill key={index} skill={skill} className={classes.skill} />;
       })}
     </span>
   );

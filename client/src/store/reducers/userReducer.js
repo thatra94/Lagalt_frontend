@@ -3,8 +3,6 @@ import {
   ACTION_USER_FETCH_BY_USERID,
   ACTION_USER_SET_BY_USERID,
   ACTION_USER_ADD_USER_SKILL,
-  ACTION_USER_PROJECTS_FETCH_BY_USERID,
-  ACTION_USER_PROJECTS_SET_BY_USERID,
 } from "../actions/userActions";
 
 const initialState = {
@@ -12,11 +10,12 @@ const initialState = {
     id: null,
     name: "",
     userId: "",
-    imageUrl: null,
-    description: null,
+    imageUrl: "",
+    description: "",
     skills: [],
   },
-  projects: null,
+  projects: [],
+  personalProjects: [],
   error: "",
   fetching: false,
 };
@@ -26,6 +25,8 @@ export function userReducer(state = initialState, action) {
     case ACTION_USER_FETCH_BY_USERID:
       return {
         user: null,
+        projects: [],
+        personalProjects: [],
         fetching: true,
         error: "",
       };
@@ -35,6 +36,8 @@ export function userReducer(state = initialState, action) {
         error: "",
         fetching: false,
         user: action.payload,
+        projects: [],
+        personalProjects: [],
       };
 
     case ACTION_USER_ADD_USER_SKILL:
@@ -44,22 +47,6 @@ export function userReducer(state = initialState, action) {
           ...state.user,
           skills: [...state.user.skills, { name: action.payload }],
         },
-      };
-
-    case ACTION_USER_PROJECTS_FETCH_BY_USERID:
-      return {
-        ...state,
-        error: "",
-        fetching: true,
-        projects: null,
-      };
-
-    case ACTION_USER_PROJECTS_SET_BY_USERID:
-      return {
-        ...state,
-        error: "",
-        fetching: false,
-        projects: action.payload,
       };
 
     case ACTION_USER_ERROR:

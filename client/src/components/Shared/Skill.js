@@ -9,6 +9,7 @@ export function Skill({ skill }) {
       color="primary"
       key={skill.name}
       label={skill.name}
+      size="small"
     />
   );
 }

@@ -9,10 +9,16 @@ export const ProjectBannerTags = ({ project }) => {
         color="secondary"
         key={project.industryName}
         label={project.industryName}
+        size="small"
       />
       {project.themes.map((theme) => {
         return (
-          <Chip className={classes.theme} key={theme.name} label={theme.name} />
+          <Chip
+            className={classes.theme}
+            key={theme.name}
+            label={theme.name}
+            size="small"
+          />
         );
       })}
     </div>

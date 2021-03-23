@@ -12,6 +12,7 @@ export function ProjectBannerSkills({ skills }) {
             )}
         </Container>
     )
+
 }
 
 const useStyles = makeStyles((theme) => ({

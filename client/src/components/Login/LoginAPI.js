@@ -25,16 +25,17 @@ export const fetchUserByUserId = (userId) => {
     });
 };
 
-export const postUser = (user) => {
+export const postUser = (user, token) => {
   try {
     return fetchUserByUserId(user.userId).then((users) => {
       console.log(users);
       if (users === null)
         return fetch(`${API_BASE_URL}/users`, {
           method: "POST",
-          headers: {
+          headers: new Headers({
             "Content-Type": "application/json",
-          },
+            Authorization: `Bearer ${token}`,
+          }),
           body: JSON.stringify(user),
         })
           .then(async (response) => {

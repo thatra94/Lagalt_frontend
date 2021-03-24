@@ -5,7 +5,7 @@ import {
   makeStyles,
   Avatar,
 } from "@material-ui/core";
-import { MainBannerItemText } from "./ProjectBannerItemText";
+import { ProjectBannerItemTopRow } from "./ProjectBannerItemTopRow";
 import { ProjectBannerSkills } from "./ProjectBannerSkills";
 
 export function ProjectBannerItem({ project }) {
@@ -32,8 +32,8 @@ export function ProjectBannerItem({ project }) {
           src={project.imageUrl}
         />
       </ListItemAvatar>
-      <div>
-        <MainBannerItemText project={project}></MainBannerItemText>
+      <div className={Classes.bannerMainContent}>
+        <ProjectBannerItemTopRow project={project}></ProjectBannerItemTopRow>
         {project.skills && (
           <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
         )}
@@ -44,6 +44,10 @@ export function ProjectBannerItem({ project }) {
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
+    width: "100%",
+  },
+  bannerMainContent : {
+    marginLeft: theme.spacing(2),
     width: "100%",
   },
   avatar: {

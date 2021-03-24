@@ -21,13 +21,7 @@ function TabPanel(props) {
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          <Container>
-            <Box>{children}</Box>
-          </Container>
-        </Box>
-      )}
+      {value === index && <Box p={2}>{children}</Box>}
     </div>
   );
 }
@@ -56,27 +50,25 @@ export function ProfileProjectTabs() {
 
   return (
     <div className={classes.root}>
-      <Paper>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Lagalt" {...a11yProps(0)} />
-            <Tab label="Personal" {...a11yProps(1)} />
-          </Tabs>
-        </AppBar>
-        <TabPanel value={value} index={0}>
-          <ProjectBanners projects={projects} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <ProfileProjectsTabPersonalAddButton></ProfileProjectsTabPersonalAddButton>
-          <ProfileProjectsTabPersonalProjects></ProfileProjectsTabPersonalProjects>
-        </TabPanel>
-      </Paper>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="Lagalt" {...a11yProps(0)} />
+          <Tab label="Personal" {...a11yProps(1)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <ProjectBanners projects={projects} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <ProfileProjectsTabPersonalProjects></ProfileProjectsTabPersonalProjects>
+        <ProfileProjectsTabPersonalAddButton></ProfileProjectsTabPersonalAddButton>
+      </TabPanel>
     </div>
   );
 }
@@ -85,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
+    padding: 0,
+    //backgroundColor: theme.palette.background.paper,
   },
 }));

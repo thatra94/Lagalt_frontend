@@ -22,6 +22,8 @@ import {
   userPersonalProjectsFetchingByUserIdAction,
 } from "../../store/actions/userProjectsActions";
 
+import { userUpdateAction } from "../../store/actions/userActions";
+
 export function Profile() {
   const { keycloak } = useKeycloak();
   const history = useHistory();
@@ -29,20 +31,29 @@ export function Profile() {
   const { error, user } = useSelector((state) => state.userReducer);
   console.log(user);
   const Classes = useStyles();
-
   const [skill, setSkill] = useState("");
+  const [skillList, setSkillList] = useState([]);
   const [description, setDescription] = useState("");
-
+  const [skillError, setSkillError] = useState(false);
   useEffect(() => {
     if (user.description != null) {
       setDescription(user.description);
+    }
+    if (user.skills != null) {
+      setSkillList(user.skills);
     }
     dispatch(userProjectsFetchingByUserIdAction("example-token"));
     dispatch(userPersonalProjectsFetchingByUserIdAction(keycloak.subject));
   }, []);
 
   const handleSubmit = () => {
-    dispatch(userAddSkill(skill));
+    if (skill != "") {
+      setSkillList([...skillList, { name: skill }]);
+      setSkill("");
+      setSkillError(false);
+    } else {
+      setSkillError(true);
+    }
   };
 
   const handleChange = (event) => {
@@ -55,7 +66,10 @@ export function Profile() {
     setDescription(event.target.value);
   };
   const saveChanges = () => {
-    putUser(user);
+    let updatedUser = user;
+    updatedUser.description = description;
+    updatedUser.skills = skillList;
+    dispatch(userUpdateAction(updatedUser));
   };
 
   return (
@@ -105,6 +119,7 @@ export function Profile() {
                         fullWidth
                         variant="outlined"
                         value={skill}
+                        error={skillError}
                         onInput={handleChange}
                       />
                     </Grid>
@@ -119,9 +134,9 @@ export function Profile() {
                       </Button>
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                      {user.skills && (
+                      {skillList && (
                         <ProfileSkills
-                          skills={user.skills}
+                          skills={skillList}
                           className={Classes.skills}
                         ></ProfileSkills>
                       )}

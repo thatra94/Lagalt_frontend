@@ -10,6 +10,7 @@ export const ProjectBannerTags = ({ project }) => {
         key={project.industryName}
         label={project.industryName}
         size="small"
+        borderRadius={0}
       />
       {project.themes.map((theme) => {
         return (
@@ -18,6 +19,7 @@ export const ProjectBannerTags = ({ project }) => {
             key={theme.name}
             label={theme.name}
             size="small"
+            borderRadius={0}
           />
         );
       })}
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     flex: 7,
+    flexWrap: "wrap",
   },
   industry: {
     marginRight: theme.spacing(3),

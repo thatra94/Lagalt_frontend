@@ -14,8 +14,6 @@ const initialState = {
     description: "",
     skills: [],
   },
-  projects: [],
-  personalProjects: [],
   error: "",
   fetching: false,
 };
@@ -25,8 +23,6 @@ export function userReducer(state = initialState, action) {
     case ACTION_USER_FETCH_BY_USERID:
       return {
         user: null,
-        projects: [],
-        personalProjects: [],
         fetching: true,
         error: "",
       };
@@ -36,8 +32,6 @@ export function userReducer(state = initialState, action) {
         error: "",
         fetching: false,
         user: action.payload,
-        projects: [],
-        personalProjects: [],
       };
 
     case ACTION_USER_ADD_USER_SKILL:

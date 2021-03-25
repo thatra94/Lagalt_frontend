@@ -5,6 +5,7 @@ export const ACTION_USER_PROJECTS_FETCH_BY_USERID =
   "user:FETCHING_PROJECTS_BY_USERID";
 export const ACTION_USER_PROJECTS_SET_BY_USERID = "user:SET_PROJECTS_BY_USERID";
 export const ACTION_USER_ERROR = "user:ERROR";
+export const ACTION_USER_UPDATE = "user:UPDATE_USER";
 
 export const userFetchingByUserIdAction = (payload) => ({
   type: ACTION_USER_FETCH_BY_USERID,
@@ -18,6 +19,11 @@ export const userSetByUserIdAction = (payload) => ({
 
 export const userAddSkill = (payload) => ({
   type: ACTION_USER_ADD_USER_SKILL,
+  payload,
+});
+
+export const userUpdateAction = (payload) => ({
+  type: ACTION_USER_UPDATE,
   payload,
 });
 

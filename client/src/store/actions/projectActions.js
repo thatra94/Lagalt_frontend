@@ -16,7 +16,3 @@ export const projectErrorAction = payload => ({
     type: ACTION_PROJECT_ERROR,
     payload
 })
-
-
-
-

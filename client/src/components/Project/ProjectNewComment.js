@@ -8,7 +8,7 @@ export const ProjectNewComment = (props) => {
   const dispatch = useDispatch();
 
   const [comment, setComment] = useState('');
-
+  const [error, setError] = useState('')
   const handleChange = (event) => {
     setComment(event.target.value);
   };
@@ -20,7 +20,9 @@ export const ProjectNewComment = (props) => {
       message: comment,
       date: new Date(),
     };
-    dispatch(commentAddAction(commentObj));
+    const res = dispatch(commentAddAction(commentObj));
+    setComment('');
+    console.log("res: ",res)
   };
 
   return (
@@ -29,6 +31,7 @@ export const ProjectNewComment = (props) => {
         id="outlined-full-width"
         label="Kommenter"
         onChange={handleChange}
+        value={comment}
         multiline
         fullWidth
         rows={4}

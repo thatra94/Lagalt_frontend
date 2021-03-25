@@ -1,12 +1,12 @@
 import {useSelector} from 'react-redux'
 import {ProjectUserCommentItem} from './ProjectUserCommentItem'
 export const ProjectUserCommentsList = () => {
-    const { comment } = useSelector((state) => state.commentReducer);
-    console.log(comment)
+    const { comment: comments } = useSelector((state) => state.commentReducer);
+    console.log(comments)
     return (
         <div>
-            {comment && comment.map((c) => {
-                return (<ProjectUserCommentItem comment={c}/>)
+            {comments && comments.map((comment) => {
+                return (<ProjectUserCommentItem comment={comment}/>)
             })}
         </div>
     )

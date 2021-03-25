@@ -16,13 +16,16 @@ export const ProjectComments = ({ project }) => {
   const classes = useStyles();
   return (
     <Container>
-      {userReducer.user.id && (
+      {userReducer.user.id ? (
         <div>
           <h5>Skriv en kommentar</h5>
           <ProjectNewComment project={project} userId={userReducer.user.id} />
           <Divider className={classes.divider} />
         </div>
+      ) : (
+        <h6>Logg inn for å skrive en kommentar</h6>
       )}
+
       {error && <p>{error}</p>}
       {fetching && <p>Getting comments...</p>}
       <div>

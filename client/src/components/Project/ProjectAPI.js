@@ -31,3 +31,25 @@ export const fetchCommentsByProjectId = (projectId) => {
     .then((response) => response.json())
     .then((response) => response.data);
 };
+
+
+export const fetchApplicationsByProjectId = (projectId) => {
+  console.log('\n fetchApplicationsByProjectId \n');
+  return fetch(`${API_BASE_URL}/ProjectApplications/${projectId}/comments`)
+    .then((response) => response.json())
+    .then((response) => response.data);
+};
+
+export const postApplication = (application) => {
+  console.log(JSON.stringify(application));
+  console.log('\n postApplication \n');
+  return fetch(`${API_BASE_URL}/ProjectApplications`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(application),
+  })
+    .then((res) => res.json())
+    .then((res) => res.data);
+};

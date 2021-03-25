@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     project: null,
+    
     error: '',
     fetching: false
 }
@@ -33,6 +34,7 @@ export function projectReducer(state = initialState, action) {
                 fetching: false,
                 error: action.payload
             }
+
         default:
             return state
     }

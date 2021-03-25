@@ -7,24 +7,25 @@ import { commentFetchingByIdAction } from '../../store/actions/commentActions';
 
 export const ProjectComments = ({ project }) => {
   const dispatch = useDispatch();
-  console.log('projekt id ' + project.id);
   useEffect(() => {
     dispatch(commentFetchingByIdAction(project.id));
   }, [dispatch]);
 
   const { fetching, error } = useSelector((state) => state.commentReducer);
   const userReducer = useSelector((state) => state.userReducer);
-  console.log(userReducer.user)
   const classes = useStyles();
   return (
     <Container>
+      {userReducer.user.id ? (
+        <div>
+          <h5>Skriv en kommentar</h5>
+          <ProjectNewComment project={project} />
+          <Divider className={classes.divider} />
+        </div>
+      ) : (
+        <h6>Logg inn for å skrive en kommentar</h6>
+      )}
 
-      <div>
-        <h5>Skriv en kommentar</h5>
-        <ProjectNewComment project={project} />
-        <Divider className={classes.divider} />
-      </div>
-      
       {error && <p>{error}</p>}
       {fetching && <p>Getting comments...</p>}
       <div>
@@ -35,13 +36,7 @@ export const ProjectComments = ({ project }) => {
   );
 };
 /*
-{userReducer.user && (
-      <div>
-        <h5>Skriv en kommentar</h5>
-        <ProjectNewComment project={project} />
-        <Divider className={classes.divider} />
-      </div>
-      )}
+
 */
 const useStyles = makeStyles((theme) => ({
   industry: {

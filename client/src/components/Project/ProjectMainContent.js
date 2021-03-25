@@ -25,7 +25,7 @@ export const ProjectMainContent = ({ project }) => {
       </div>
       <br/>
       <div>
-        <h5>Project Links</h5> 
+        <h5>Prosjekt linker</h5> 
         {project.links &&
           project.links.map((link) => (
               <a key={link.id} target="_blank" href={link.url}>

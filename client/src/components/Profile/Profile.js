@@ -14,14 +14,11 @@ import { ProfileProjects } from "./ProfileProjects/ProfileProjects";
 import { useState, useEffect } from "react";
 import { ProfileSkills } from "./ProfileSkills";
 import { makeStyles } from "@material-ui/core/styles";
-import { userAddSkill } from "../../store/actions/userActions";
-import { putUser } from "./ProfileAPI";
-
 import {
   userProjectsFetchingByUserIdAction,
   userPersonalProjectsFetchingByUserIdAction,
 } from "../../store/actions/userProjectsActions";
-
+import { ProfileHiddenToggle } from "./ProfileHiddenToggle";
 import { userUpdateAction } from "../../store/actions/userActions";
 
 export function Profile() {
@@ -47,7 +44,7 @@ export function Profile() {
   }, []);
 
   const handleSubmit = () => {
-    if (skill != "") {
+    if (skill !== "") {
       setSkillList([...skillList, { name: skill }]);
       setSkill("");
       setSkillError(false);
@@ -72,6 +69,9 @@ export function Profile() {
     dispatch(userUpdateAction(updatedUser));
   };
 
+  const handleDelete = () => {
+    console.log("delete");
+  };
   return (
     <div>
       <Navbar history={history}></Navbar>
@@ -97,7 +97,6 @@ export function Profile() {
                     </Grid>
                     <Grid item xs={12} sm={12}>
                       <h1>{user.name}</h1>
-                      <p>{user.id}</p>
                     </Grid>
                     <Grid item xs={10} sm={10}>
                       <TextField
@@ -142,17 +141,22 @@ export function Profile() {
                       )}
                     </Grid>
                     <Grid item>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        onClick={saveChanges}
-                      >
-                        Lagre endringer
-                      </Button>
+                      <ProfileHiddenToggle
+                        onDelete={handleDelete}
+                      ></ProfileHiddenToggle>
                     </Grid>
                   </Grid>
                 </Paper>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  onClick={saveChanges}
+                  className={Classes.changes}
+                >
+                  Lagre endringer
+                </Button>
               </>
             )}
           </Grid>
@@ -165,8 +169,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  skills: {
-    marginTop: theme.spacing(2),
+  changes: {
+    marginTop: theme.spacing(3),
   },
   avatar: {
     minWidth: "6em",

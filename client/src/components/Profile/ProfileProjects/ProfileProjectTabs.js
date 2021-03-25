@@ -9,7 +9,7 @@ import { Box, Paper, Button, Container } from "@material-ui/core";
 import { ProfileProjectsTabPersonalProjects } from "./ProfileProjectsTabPersonalProjects";
 import { ProfileProjectsTabPersonalAddButton } from "./ProfileProjectsTabPersonalAddButton";
 import { ProjectBanners } from "../../Shared/ProjectBanner/ProjectsBanners";
-
+import { ProfileHiddenToggle } from "../ProfileHiddenToggle";
 import { useDispatch, useSelector } from "react-redux";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

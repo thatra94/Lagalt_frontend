@@ -6,7 +6,7 @@ export const ProjectUserCommentsList = () => {
     return (
         <div>
             {comments && comments.map((comment) => {
-                return (<ProjectUserCommentItem key={comment.id} comment={comment}/>)
+                return (<ProjectUserCommentItem comment={comment}/>)
             })}
         </div>
     )

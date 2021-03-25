@@ -19,7 +19,7 @@ export const ProjectComments = ({ project }) => {
       {userReducer.user.id ? (
         <div>
           <h5>Skriv en kommentar</h5>
-          <ProjectNewComment project={project} />
+          <ProjectNewComment project={project} userId={userReducer.user.id} />
           <Divider className={classes.divider} />
         </div>
       ) : (

@@ -11,7 +11,6 @@ export const fetchUserById = (userId) => {
       return user;
     });
 };
-
 export const fetchUserByUserId = (userId) => {
   return fetch(`${API_BASE_URL}/users/${userId}`)
     .then((r) => r.json())

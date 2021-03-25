@@ -15,29 +15,36 @@ export function ProfileProjectsTabPersonalAddButton() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
+  const [error, setError] = useState(false);
+
   const dispatch = useDispatch();
-  const { error, user } = useSelector((state) => state.userReducer);
+  const { user } = useSelector((state) => state.userReducer);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
-    let project = {
-      name: title,
-      description: description,
-      link: link,
-      userId: user.id,
-    };
-    dispatch(userAddPersonalProjectAction(project));
-    clearPopup();
+    if (title === "") {
+      setError(true);
+    } else {
+      setOpen(false);
+      let project = {
+        name: title,
+        description: description,
+        link: link,
+        userId: user.id,
+      };
+      dispatch(userAddPersonalProjectAction(project));
+      clearPopup();
+    }
   };
 
   const clearPopup = () => {
     setTitle("");
     setDescription("");
     setLink("");
+    setError(false);
   };
   const handleTitleChange = (event) => {
     event.preventDefault();
@@ -56,7 +63,7 @@ export function ProfileProjectsTabPersonalAddButton() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Legg til prosjekt
       </Button>
       <Dialog
@@ -71,6 +78,7 @@ export function ProfileProjectsTabPersonalAddButton() {
             margin="dense"
             id="title"
             label="Tittel"
+            error={error}
             fullWidth
             value={title}
             onInput={handleTitleChange}

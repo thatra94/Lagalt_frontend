@@ -17,7 +17,7 @@ export function commentReducer(state = initialState, action) {
 
         case ACTION_COMMENT_FETCH_BY_ID:
             return {
-                ...state,
+                comment: [],
                 fetching: true,
                 error: ''
             }

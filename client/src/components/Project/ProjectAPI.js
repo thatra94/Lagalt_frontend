@@ -13,7 +13,6 @@ export const fetchProjectById = (projectId) => {
 };
 
 export const postComment = (comment) => {
-  console.log(comment.userId+"=====");
   console.log(JSON.stringify(comment));
   return fetch(`${API_BASE_URL}/UserComments`, {
     method: 'POST',

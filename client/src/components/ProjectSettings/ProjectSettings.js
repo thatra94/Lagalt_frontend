@@ -27,7 +27,7 @@ export const ProjectSettings = (props) => {
     status: "Opprettet",
     skills: [],
     themes: [],
-    links: [{ name: "" }],
+    links: [{ name: "", url: "" }],
   });
 
   console.log(projectInfo);
@@ -79,7 +79,7 @@ export const ProjectSettings = (props) => {
   };
 
   return (
-    <Grid container className={classes.pageContentContainer} xs={12}>
+    <Grid container className={classes.pageContentContainer}>
       <Paper className={classes.paper} style={{ marginTop: "5rem" }}>
         <Grid container style={{ width: "800px" }}>
           <Grid item container xs={6}>
@@ -147,6 +147,7 @@ export const ProjectSettings = (props) => {
             </Grid>
           </Grid>
           <Grid
+            item
             container
             xs={6}
             direction="column"
@@ -155,7 +156,7 @@ export const ProjectSettings = (props) => {
           >
             {projectInfo.links.map((x, i) => {
               return (
-                <Grid container justify="center">
+                <Grid container justify="center" key={i}>
                   <Grid item xs={10} sm={10}>
                     <TextField
                       label="Navn"

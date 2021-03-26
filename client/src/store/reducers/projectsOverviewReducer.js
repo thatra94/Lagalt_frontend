@@ -4,6 +4,7 @@ import {
   ACTION_PROJECTS_OVERVIEW_SET,
   ACTION_PROJECTS_OVERVIEW_SEARCH,
   ACTION_PROJECTS_OVERVIEW_SEARCH_SUCCESS,
+  ACTION_PROJECTS_OVERVIEW_FETCH_BY_INDUSTRY,
 } from "../actions/projectsOverviewActions";
 
 const initialState = {
@@ -44,6 +45,13 @@ export function projectsOverviewReducer(state = initialState, action) {
         return {
             projects: action.payload,
             fetching: false,
+            error: ''
+      }
+
+      case ACTION_PROJECTS_OVERVIEW_FETCH_BY_INDUSTRY:
+        return {
+            ...state,
+            fetching: true,
             error: ''
       }
       

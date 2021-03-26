@@ -14,6 +14,21 @@ export const fetchProjectsBySearchString = (searchString) => {
         .then(response => response.data)
   return res;
 };
+
+export const fetchProjectsByIndustry = (industry) => {
+  const res = fetch(`${ API_BASE_URL }/projects/filter/industry=${ industry }`)
+        .then(response => response.json())
+        .then(response => response.data)
+  return res;
+};
+
+
+export const fetchIndustries = () => {
+  const res = fetch(`${ API_BASE_URL }/industries`)
+        .then(response => response.json())
+        .then(response => response.data)
+  return res;
+}
      /*
 export const fetchProjects = () => {
     return [

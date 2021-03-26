@@ -30,6 +30,8 @@ export const ProjectApplicationDialog = (props) => {
         <DialogContent>
           <DialogContentText>
             Legg ved en kortfattet motivasjonstekst til prosjekt søknaden!
+          </DialogContentText> <DialogContentText>
+          <h6> NB! Ved å sende inn en søknad godtar du at projekt lederen får tilgang til din personlige profil informasjon </h6>
           </DialogContentText>
           <TextField
             autoFocus
@@ -45,15 +47,20 @@ export const ProjectApplicationDialog = (props) => {
             rows={4}
             onChange={handleChange}
           />
-        </DialogContent>
+        </DialogContent>   
         <DialogActions>
           <Button onClick={props.handleClose} color="secondary">
             Avbryt
           </Button>
           <Button onClick={() => props.handleSubmit(motivationText)} color="primary">
             Send
-          </Button>
-        </DialogActions>
+          </Button> 
+         
+        </DialogActions> 
+    
+
+    
+
       </Dialog>
     </div>
   );

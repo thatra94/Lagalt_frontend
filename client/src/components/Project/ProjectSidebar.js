@@ -27,7 +27,7 @@ export const ProjectSidebar = ({ project }) => {
         {project.users &&
           project.users.map((user) => (
             <ul key={user}>
-              <li>{user} </li>
+              <li>{user.name} </li>
             </ul>
           ))}
       </List>

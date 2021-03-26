@@ -31,7 +31,7 @@ export const commentMiddleware = ({dispatch }) => (next) => (action) => {
             dispatch(commentAddSuccessAction(comment));
         })
         .catch(error => {
-            dispatch( commentErrorAction(error) )
+            dispatch( commentErrorAction(error.message) )
         })
     }
 };

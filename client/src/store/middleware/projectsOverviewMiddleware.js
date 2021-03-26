@@ -1,21 +1,20 @@
 import {
-  ACTION_PROJECTS_OVERVIEW_FETCHING,
+  ACTION_PROJECTS_OVERVIEW_FETCH,
+  ACTION_PROJECTS_OVERVIEW_SEARCH,
+
   projectsOverviewErrorAction,
   projectsOverviewSetAction,
+  projectsOverviewSearchSuccessAction
 } from "../actions/projectsOverviewActions";
-import {fetchProjects} from "../../components/ProjectsOverview/ProjectsOverviewAPI"
+import {fetchProjects,fetchProjectsBySearchString} from "../../components/ProjectsOverview/ProjectsOverviewAPI"
 
 export const projectsOverviewMiddleware = ({ getState, dispatch }) => next => action => {
 
   next(action)
 
-  if (action.type === ACTION_PROJECTS_OVERVIEW_FETCHING) {
+  if (action.type === ACTION_PROJECTS_OVERVIEW_FETCH) {
 
-    const { projectsOverviewReducer } = getState()
-
-    if (projectsOverviewReducer.projects.length > 0) {
-      return dispatch(projectsOverviewSetAction(projectsOverviewReducer.projects))
-    }
+    
 
     fetchProjects().then(projects => {
       dispatch(projectsOverviewSetAction(projects))
@@ -23,4 +22,14 @@ export const projectsOverviewMiddleware = ({ getState, dispatch }) => next => ac
       dispatch(projectsOverviewErrorAction(error.message))
     })
   }
+
+  if (action.type === ACTION_PROJECTS_OVERVIEW_SEARCH) {
+    fetchProjectsBySearchString( action.payload )
+        .then(projects => {
+            dispatch(projectsOverviewSearchSuccessAction(projects));
+        })
+        .catch(error => {
+            dispatch( projectsOverviewErrorAction(error) )
+        })
+    }
 }

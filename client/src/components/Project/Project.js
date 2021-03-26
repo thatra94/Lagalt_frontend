@@ -14,7 +14,7 @@ import { commentFetchingByIdAction } from '../../store/actions/commentActions';
 export const Project = (props) => {
   const dispatch = useDispatch();
   const { fetching, error } = useSelector(
-    (state) => state.projectsOverviewReducer
+    (state) => state.projectReducer
   );
   useEffect(() => {
     dispatch(projectFetchingByIdAction(props.match.params.id));

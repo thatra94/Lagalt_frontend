@@ -6,6 +6,14 @@ export const fetchProjects = () => {
   console.log(res)
   return res;
 }
+
+
+export const fetchProjectsBySearchString = (searchString) => {
+  const res = fetch(`${ API_BASE_URL }/projects/search/project=${ searchString }`)
+        .then(response => response.json())
+        .then(response => response.data)
+  return res;
+};
      /*
 export const fetchProjects = () => {
     return [

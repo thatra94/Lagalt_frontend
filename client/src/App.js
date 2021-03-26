@@ -5,21 +5,25 @@ import { ProjectsOverview } from "./components/ProjectsOverview/ProjectsOverview
 import { Profile } from "./components/Profile/Profile";
 import { Project } from "./components/Project/Project";
 import { ProjectSettings } from "./components/ProjectSettings/ProjectSettings";
+import { ProjectAdministration } from "./components/ProjectAdministration/ProjectAdministration";
+
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import { PrivateRoute } from "./utilities/PrivateRoute";
-
+import { Navbar } from "./components/Shared/Navbar/Navbar";
 export const App = () => {
   return (
     <ReactKeycloakProvider authClient={Keycloak}>
       <BrowserRouter>
         <div className="App">
+          <Navbar></Navbar>
           <Switch>
             <Route exact path="/" component={ProjectsOverview} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute
               path="/project/:id/settings"
-              component={ProjectSettings}
+              component={ProjectAdministration}
             />
+
             <Route path="/project/:id" component={Project} />
             <Route path="/" render={() => <div>404</div>} />
           </Switch>

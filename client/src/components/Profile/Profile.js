@@ -23,7 +23,6 @@ import { userUpdateAction } from "../../store/actions/userActions";
 
 export function Profile() {
   const { keycloak } = useKeycloak();
-  const history = useHistory();
   const dispatch = useDispatch();
   const { error, user } = useSelector((state) => state.userReducer);
   console.log(user);
@@ -74,7 +73,6 @@ export function Profile() {
   };
   return (
     <div>
-      <Navbar history={history}></Navbar>
       <Container fixed>
         <Grid container direction="row" justify="space-between" spacing={10}>
           <Grid item xs={8} sm={8}>

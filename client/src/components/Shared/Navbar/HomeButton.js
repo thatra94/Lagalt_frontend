@@ -1,15 +1,22 @@
 
-import Typography from '@material-ui/core/Typography';
+import {Typography, Button, makeStyles} from '@material-ui/core';
 import { useHistory } from "react-router-dom";
-
+import { palette } from '@material-ui/system';
+import HomeSharp from '@material-ui/icons/HomeSharp';
 export const HomeButton = () => {
     let history = useHistory();
 
     return (
-        <Typography variant="button" color="inherit" onClick={() => {
+        <Button color="primary" variant="outlined" startIcon={<HomeSharp />} onClick={() => {
             history.push('/')
         }}>
-            LagAlt
-        </Typography>
+        
+            LagAlt</Button>
     );
 }
+
+const useStyles = makeStyles((theme) => ({
+    color: {
+      color: theme.white,
+    },
+  }));

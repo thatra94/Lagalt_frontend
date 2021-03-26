@@ -1,14 +1,14 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { Search } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button ,makeStyles ,Input, FormControl, InputLabel, InputAdornment} from '@material-ui/core';
+
 import { HomeButton } from './HomeButton'
 import { Link } from 'react-router-dom';
 import { Login } from '../../Login/Login'
 import { useHistory } from 'react-router-dom';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 export const Navbar = (props) => {
@@ -18,26 +18,20 @@ export const Navbar = (props) => {
     <div>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <HomeButton/>
+          <HomeButton/>         
           <Container className={classes.search}>            
-            <InputBase
-              placeholder="Search for projects…"
-              className={
-                classes.inputInput
-              }
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Container>
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li
-            onClick={() => {
-              history.push("/project/4");
-            }}
-          >
-            Project
-          </li>
+            {props.children}
+          </Container> 
+          
+          <Link to="/profile">
+          <Button
+        variant="contained"
+        color="primary"
+        className={classes.menuButton}
+        startIcon={<AccountCircle />}
+      >
+        Profil
+      </Button></Link>
           <Login></Login>
         </Toolbar>
       </AppBar>
@@ -48,6 +42,8 @@ export const Navbar = (props) => {
 const useStyles = makeStyles((theme) => ({
   navbar: {
     marginBottom: theme.spacing(4),
+    backgroundColor: "white"
+
   },
   grow: {
     flexGrow: 1,
@@ -76,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: theme.palette.common.black,
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),

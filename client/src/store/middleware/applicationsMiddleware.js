@@ -30,7 +30,7 @@ import {
               dispatch(applicationsAddSuccessAction(application));
           })
           .catch(error => {
-              dispatch( applicationsErrorAction(error) )
+              dispatch( applicationsErrorAction(error.message) )
           })
       }
   };

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { userSetByUserIdAction } from "../../store/actions/userActions";
+import { Button } from "@material-ui/core"
 import { useKeycloak } from "@react-keycloak/web";
 import { useDispatch, useSelector } from "react-redux";
 import { postUser } from "./LoginAPI";
@@ -34,15 +35,16 @@ export function Login() {
   return (
     <div>
       {keycloak && !!keycloak.authenticated && (
-        <li className="btn-link" onClick={() => keycloak.logout()}>
-          Logout ({keycloak.tokenParsed.preferred_username})
-        </li>
+        <Button  variant="outlined" color="secondary" className="btn-link" onClick={() => keycloak.logout()}>
+          Logg Ut 
+        </Button>
       )}
       {keycloak && !keycloak.authenticated && (
-        <li className="btn-link" onClick={() => keycloak.login()}>
-          Login
-        </li>
+        <Button variant="contained" color="secondary" className="btn-link" onClick={() => keycloak.login()}>
+          Logg In
+        </Button>
       )}
     </div>
   );
 }
+//({keycloak.tokenParsed.preferred_username})

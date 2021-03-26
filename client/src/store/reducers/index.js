@@ -5,6 +5,7 @@ import { projectReducer } from "./projectReducer";
 import { commentReducer } from "./commentReducer";
 import { userProjectsReducer } from "./userProjectsReducer";
 import { applicationsReducer } from "./applicationsReducer";
+import { industriesReducer } from "./industriesReducer";
 
 export const rootReducers = combineReducers({
   userReducer,
@@ -13,4 +14,5 @@ export const rootReducers = combineReducers({
   commentReducer,
   userProjectsReducer,
   applicationsReducer,
+  industriesReducer
 });

@@ -7,6 +7,7 @@ import { projectMiddleware } from './middleware/projectMiddleware';
 import { commentMiddleware } from './middleware/commentMiddleware';
 import { userProjectsMiddleware } from './middleware/userProjectsMiddleware';
 import {applicationsMiddleware} from './middleware/applicationsMiddleware';
+import { industriesMiddleware} from './middleware/industriesMiddleware';
 
 export const store = createStore(
   rootReducers,
@@ -18,6 +19,7 @@ export const store = createStore(
       commentMiddleware,
       userProjectsMiddleware,
       applicationsMiddleware,
+      industriesMiddleware,
     )
   )
 );

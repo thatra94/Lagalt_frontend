@@ -1,14 +1,18 @@
-import {Button, TextField ,Container} from '@material-ui/core'
+import {Button, TextField ,Container,createStyles, makeStyles, Theme} from '@material-ui/core'
 import {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { projectsOverviewSearchAction } from '../../store/actions/projectsOverviewActions';
+import React from "react";
+
+
 export const ProjectsOverviewSearch = () => {
 
     const [search, setSearch] = useState('');
     const dispatch = useDispatch();  
    
   
-    
+    const classes = useStyles();
+
     const handleChange = (event) => {
         setSearch(event.target.value);
           console.log(search)
@@ -24,6 +28,9 @@ export const ProjectsOverviewSearch = () => {
         <Container >
             
         <TextField 
+        InputProps={{
+            className: classes.input
+         }}
         size="small"
         variant="outlined" 
         id="outlined-fullwidth-motivasjonstekst"
@@ -40,3 +47,10 @@ export const ProjectsOverviewSearch = () => {
     )
 
 }
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    input: {
+      height: 36
+    }
+  })
+);

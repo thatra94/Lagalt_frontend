@@ -14,28 +14,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { projectsOverviewFetchAction } from '../../store/actions/projectsOverviewActions';
 import { ProjectsOverviewSearch} from "./ProjectsOverviewSearch"
+import { ProjectsOverviewIndustries} from "./ProjectsOverviewIndustries"
+
 export const ProjectsOverview = () => {
 
-  //panel
-
   const history = useHistory();
-  const industries = [
-    'All',
-    'Webutvikling',
-    'Musikk',
-    'Spillutvikling',
-    'Film',
-    'Animasjon',
-    'Foto',
-  ];
+
   const dispatch = useDispatch();
   const { fetching, error, projects } = useSelector(
     (state) => state.projectsOverviewReducer
   );
   const classes = useStyles();
-
-
-
+  
   useEffect(() => {
     dispatch(projectsOverviewFetchAction());
   }, []);
@@ -53,14 +43,7 @@ export const ProjectsOverview = () => {
         <Grid container spacing={3}>
           <Grid item xs={12} md={9}>
             <Paper className={classes.paper}>
-              <ButtonGroup
-                color="secondary"
-                aria-label="outlined primary button group"
-              >
-                {industries.map((industry) => (
-                  <Button key={industry}>{industry}</Button>
-                ))}
-              </ButtonGroup>
+            <ProjectsOverviewIndustries/>
             </Paper>
           </Grid>
           <Grid item xs={12} md={3}>

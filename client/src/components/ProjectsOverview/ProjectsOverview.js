@@ -42,9 +42,6 @@ export const ProjectsOverview = () => {
 
   return (
     <div>
-      <Navbar history={history}>
-       
-      </Navbar>
       <Container maxWidth="xl">
         {error && <p>{error}</p>}
         {fetching && <p>Getting projects...</p>}

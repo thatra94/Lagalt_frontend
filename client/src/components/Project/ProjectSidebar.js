@@ -1,17 +1,11 @@
-import { useEffect, useState } from 'react';
-import {
-  Container,
-  makeStyles,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
-import { projectFetchingByIdAction } from '../../store/actions/projectActions';
-import { ProjectBannerSkills } from '../Shared/ProjectBanner/ProjectBannerSkills';
-import { ProjectApplication } from './ProjectApplication';
+import { useEffect, useState } from "react";
+import { Container, Divider, List } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { projectFetchingByIdAction } from "../../store/actions/projectActions";
+import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
+import { ProjectApplication } from "./ProjectApplication";
+import { ProjectSettingsButton } from "./ProjectSettingsButton";
+
 export const ProjectSidebar = ({ project }) => {
   return (
     <Container>
@@ -22,11 +16,12 @@ export const ProjectSidebar = ({ project }) => {
       <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
       <br />
       <ProjectApplication />
-      <h5>Prosjekt Medlemmer</h5>{' '}
+      <ProjectSettingsButton project={project} />
+      <h5>Prosjekt Medlemmer</h5>{" "}
       <List>
         {project.users &&
           project.users.map((user) => (
-            <ul key={user}>
+            <ul key={user.name}>
               <li>{user.name} </li>
             </ul>
           ))}

@@ -14,7 +14,8 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import { mdiCloseThick } from "@mdi/js";
 import Icon from "@mdi/react";
 import { projectUpdateAction } from "../../store/actions/projectActions";
-
+import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
+import { Skill } from "../Shared/Skill";
 export const ProjectSettings = (props) => {
   const { project } = useSelector((state) => state.projectReducer);
   const classes = useStyles();
@@ -143,6 +144,20 @@ export const ProjectSettings = (props) => {
                     Fullført
                   </ToggleButton>
                 </ToggleButtonGroup>
+              </Grid>
+              <Grid item>
+                <h5>Skills</h5>
+                {project.skills &&
+                  project.skills.map((skill) => {
+                    return <Skill key={skill.id} skill={skill} />;
+                  })}
+              </Grid>
+              <Grid item>
+                <h5>Temaer</h5>
+                {project.themes &&
+                  project.themes.map((theme) => {
+                    return <Skill key={theme.id} skill={theme} />;
+                  })}
               </Grid>
             </Grid>
           </Grid>

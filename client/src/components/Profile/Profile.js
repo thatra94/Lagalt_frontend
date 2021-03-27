@@ -1,6 +1,8 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { Navbar } from "../Shared/Navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
+import Switch from "@material-ui/core/Switch";
+
 import { useParams, useHistory } from "react-router-dom";
 import {
   Container,
@@ -30,6 +32,11 @@ export function Profile() {
   const [skill, setSkill] = useState("");
   const [skillList, setSkillList] = useState([]);
   const [description, setDescription] = useState("");
+  const [hidden, setHidden] = useState(false);
+
+  const toggleHidden = () => {
+    setHidden((prev) => !prev);
+  };
   const [skillError, setSkillError] = useState(false);
   useEffect(() => {
     if (user.description != null) {
@@ -37,6 +44,9 @@ export function Profile() {
     }
     if (user.skills != null) {
       setSkillList(user.skills);
+    }
+    if (user.hidden != null) {
+      setHidden(user.hidden);
     }
     dispatch(userProjectsFetchingByUserIdAction("example-token"));
     dispatch(userPersonalProjectsFetchingByUserIdAction(keycloak.subject));
@@ -65,6 +75,7 @@ export function Profile() {
     let updatedUser = user;
     updatedUser.description = description;
     updatedUser.skills = skillList;
+    updatedUser.hidden = hidden;
     dispatch(userUpdateAction(updatedUser));
   };
 
@@ -138,10 +149,22 @@ export function Profile() {
                         ></ProfileSkills>
                       )}
                     </Grid>
-                    <Grid item>
-                      <ProfileHiddenToggle
-                        onDelete={handleDelete}
-                      ></ProfileHiddenToggle>
+                    <Grid
+                      item
+                      component="label"
+                      container
+                      alignItems="center"
+                      justify="center"
+                      spacing={1}
+                    >
+                      <Grid item>
+                        <Switch
+                          checked={hidden}
+                          onChange={toggleHidden}
+                          name="checkedC"
+                        />
+                      </Grid>
+                      <Grid item>Skjul skills</Grid>
                     </Grid>
                   </Grid>
                 </Paper>

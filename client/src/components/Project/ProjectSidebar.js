@@ -5,8 +5,16 @@ import { projectFetchingByIdAction } from "../../store/actions/projectActions";
 import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
 import { ProjectApplication } from "./ProjectApplication";
 import { ProjectSettingsButton } from "./ProjectSettingsButton";
+import { useHistory } from "react-router-dom";
 
 export const ProjectSidebar = ({ project }) => {
+  let history = useHistory();
+
+  const userOnclick = (id) => (event) => {
+    event.preventDefault();
+    history.push(`/users/${id}`);
+  };
+
   return (
     <Container>
       <h2>{project.name}</h2>
@@ -17,12 +25,12 @@ export const ProjectSidebar = ({ project }) => {
       <br />
       <ProjectApplication />
       <ProjectSettingsButton project={project} />
-      <h5>Prosjekt Medlemmer</h5>{" "}
+      <h5>Prosjekt Medlemmer</h5>
       <List>
         {project.users &&
           project.users.map((user) => (
             <ul key={user.name}>
-              <li>{user.name} </li>
+              <li onClick={userOnclick(user.id)}>{user.name}</li>
             </ul>
           ))}
       </List>

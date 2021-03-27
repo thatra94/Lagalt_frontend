@@ -13,7 +13,6 @@ export const fetchUser = () => {
 // };
 
 export const fetchUserProjectsByUserId = (userId) => {
-  console.log("Test");
   const res = fetch(`${API_BASE_URL}/users/${userId}/projects`)
     .then((response) => response.json())
     .then((response) => response.data);
@@ -22,7 +21,6 @@ export const fetchUserProjectsByUserId = (userId) => {
 };
 
 export const fetchUserPersonalProjectsByUserId = (userId) => {
-  console.log("Test");
   const res = fetch(`${API_BASE_URL}/Portfolios/users/${userId}`)
     .then((response) => response.json())
     .then((response) => response.data);

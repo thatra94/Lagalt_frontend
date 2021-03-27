@@ -3,27 +3,32 @@ import { Chip, makeStyles, Container } from "@material-ui/core";
 export const ProjectBannerTags = ({ project }) => {
   const classes = useStyles();
   return (
-    <div className={classes.tagsContainer}>
-      <Chip
-        className={classes.industry}
-        color="secondary"
-        key={project.industryName}
-        label={project.industryName}
-        size="small"
-        borderRadius={0}
-      />
-      {project.themes.map((theme) => {
-        return (
+    <>
+      {project !== null && (
+        <div className={classes.tagsContainer}>
           <Chip
-            className={classes.theme}
-            key={theme.name}
-            label={theme.name}
+            className={classes.industry}
+            color="secondary"
+            key={project.industryName}
+            label={project.industryName}
             size="small"
             borderRadius={0}
           />
-        );
-      })}
-    </div>
+          {project.themes &&
+            project.themes.map((theme) => {
+              return (
+                <Chip
+                  className={classes.theme}
+                  key={theme.name}
+                  label={theme.name}
+                  size="small"
+                  borderRadius={0}
+                />
+              );
+            })}
+        </div>
+      )}
+    </>
   );
 };
 

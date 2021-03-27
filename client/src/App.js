@@ -6,6 +6,7 @@ import { Profile } from "./components/Profile/Profile";
 import { Project } from "./components/Project/Project";
 import { ProjectSettings } from "./components/ProjectSettings/ProjectSettings";
 import { ProjectAdministration } from "./components/ProjectAdministration/ProjectAdministration";
+import { UserProfile } from "./components/UserProfile/UserProfile";
 
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import { PrivateRoute } from "./utilities/PrivateRoute";
@@ -23,7 +24,7 @@ export const App = () => {
               path="/project/:id/settings"
               component={ProjectAdministration}
             />
-
+            <Route path="/users/:id" component={UserProfile} />
             <Route path="/project/:id" component={Project} />
             <Route path="/" render={() => <div>404</div>} />
           </Switch>

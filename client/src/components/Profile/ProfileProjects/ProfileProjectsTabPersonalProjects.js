@@ -12,21 +12,18 @@ import { useSelector } from "react-redux";
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
 
-export function ProfileProjectsTabPersonalProjects() {
+export function ProfileProjectsTabPersonalProjects(personalProjects) {
   const Classes = useStyles();
   const history = useHistory();
-  const { personalProjects } = useSelector(
-    (state) => state.userProjectsReducer
-  );
+  // const { personalProjects } = useSelector(
+  //   (state) => state.userProjectsReducer
+  // );
 
-  // const onItemClick = () => {
-  //   history.push(`/project/${project.id}`);
-  // };
   return (
     <Paper>
       <List style={{ padding: 0 }}>
         {personalProjects &&
-          personalProjects.map((project, index) => (
+          personalProjects.personalProjects.map((project, index) => (
             <ListItem className={Classes.listItem} key={index} button divider>
               <Grid
                 container
@@ -37,7 +34,7 @@ export function ProfileProjectsTabPersonalProjects() {
                 <Grid item xs={3}>
                   <h3>{project.name}</h3>
                 </Grid>
-                <Grid item xs={3} className={Classes.link}>
+                <Grid item xs={8} className={Classes.link}>
                   <a href={project.name} target="_blank">
                     {project.link}
                     <Icon path={mdiOpenInNew} size={1} color="blue"></Icon>
@@ -56,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   link: {
-    fontSize: "1.6em",
+    fontSize: "1em",
     fontWeight: 500,
   },
   avatar: {

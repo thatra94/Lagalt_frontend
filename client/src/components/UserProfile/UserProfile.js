@@ -13,19 +13,16 @@ import { fetchUserByUserIdByCurrentUser } from "./UserProfileAPI";
 
 export function UserProfile(userId) {
   const { error, user } = useSelector((state) => state.userReducer);
-  console.log(user);
 
   const Classes = useStyles();
 
   let { id } = useParams();
-  console.log(id);
   const [fetchedUser, setFetchedUser] = useState({
     user: {
       projects: [],
       portofolios: [],
     },
   });
-  console.log(fetchedUser);
 
   useEffect(() => {
     fetchUserByUserIdByCurrentUser(id, user.id).then((result) => {

@@ -46,7 +46,6 @@ export function ProfileProjectTabs(projects) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(projects);
 
   return (
     <div className={classes.root}>

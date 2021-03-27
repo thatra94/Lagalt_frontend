@@ -34,7 +34,7 @@ export function UserProfile(userId) {
   }, []);
 
   return (
-    <Container fixed styles={{ height: "100vh" }}>
+    <Container>
       <Grid container direction="row" justify="space-between" spacing={10}>
         {error && <p>{error}</p>}
         {fetchedUser.user && (

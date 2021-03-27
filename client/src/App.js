@@ -13,7 +13,10 @@ import { PrivateRoute } from "./utilities/PrivateRoute";
 import { Navbar } from "./components/Shared/Navbar/Navbar";
 export const App = () => {
   return (
-    <ReactKeycloakProvider authClient={Keycloak}>
+    <ReactKeycloakProvider
+      initOptions={{ checkLoginIframe: false }}
+      authClient={Keycloak}
+    >
       <BrowserRouter>
         <div className="App">
           <Navbar></Navbar>

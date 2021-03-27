@@ -4,6 +4,10 @@ import Keycloak from "keycloak-js";
 //   realm: "lagalt",
 //   clientId: "lagaltFront",
 //   "enable-cors": true,
+// initOptions: {
+//   onLoad: "check-sso",
+//   checkLoginIframe: false,
+// },
 // };
 
 //LocalClient
@@ -12,6 +16,10 @@ const keycloakConfig = {
   realm: "Lagalt",
   clientId: "lagaltClientLocal",
   "enable-cors": true,
+  initOptions: {
+    onLoad: "check-sso",
+    checkLoginIframe: false,
+  },
 };
 
 // // Deployment
@@ -20,6 +28,10 @@ const keycloakConfig = {
 //   realm: "Lagalt",
 //   clientId: "lagaltClient",
 //   "enable-cors": true,
+// initOptions: {
+//   onLoad: "check-sso",
+//   checkLoginIframe: false,
+// },
 // };
 
 const keycloak = new Keycloak(keycloakConfig);

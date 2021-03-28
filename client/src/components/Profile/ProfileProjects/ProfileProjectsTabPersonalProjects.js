@@ -19,6 +19,7 @@ export function ProfileProjectsTabPersonalProjects(personalProjects) {
   //   (state) => state.userProjectsReducer
   // );
 
+  console.log(personalProjects);
   return (
     <Paper>
       <List style={{ padding: 0 }}>
@@ -35,7 +36,7 @@ export function ProfileProjectsTabPersonalProjects(personalProjects) {
                   <h3>{project.name}</h3>
                 </Grid>
                 <Grid item xs={8} className={Classes.link}>
-                  <a href={project.name} target="_blank">
+                  <a href={"//" + project.link} target="_blank">
                     {project.link}
                     <Icon path={mdiOpenInNew} size={1} color="blue"></Icon>
                   </a>

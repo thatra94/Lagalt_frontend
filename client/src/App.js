@@ -11,6 +11,7 @@ import { UserProfile } from "./components/UserProfile/UserProfile";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
 import { PrivateRoute } from "./utilities/PrivateRoute";
 import { Navbar } from "./components/Shared/Navbar/Navbar";
+import { ProjectCreate } from "./components/ProjectCreate/ProjectCreate";
 export const App = () => {
   return (
     <ReactKeycloakProvider
@@ -27,6 +28,10 @@ export const App = () => {
               path="/project/:id/settings"
               component={ProjectAdministration}
             />
+            <PrivateRoute
+              path="/create-project"
+              component={ProjectCreate}
+            ></PrivateRoute>
             <Route path="/users/:id" component={UserProfile} />
             <Route path="/project/:id" component={Project} />
             <Route path="/" render={() => <div>404</div>} />

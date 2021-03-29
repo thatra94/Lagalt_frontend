@@ -6,6 +6,7 @@ import {
   Avatar,
   Paper,
   Box,
+  Chip,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect, useRef } from "react";
@@ -16,6 +17,8 @@ import Icon from "@mdi/react";
 import { projectUpdateAction } from "../../store/actions/projectActions";
 import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
 import { Skill } from "../Shared/Skill";
+import DoneIcon from "@material-ui/icons/Done";
+
 export const ProjectSettings = (props) => {
   const { project } = useSelector((state) => state.projectReducer);
   const classes = useStyles();
@@ -31,6 +34,8 @@ export const ProjectSettings = (props) => {
     links: [{ name: "", url: "" }],
   });
 
+  const [skill, setSkill] = useState("");
+
   console.log(projectInfo);
 
   useEffect(() => {
@@ -39,6 +44,17 @@ export const ProjectSettings = (props) => {
     }
   }, []);
 
+  const handleSkillDelete = (index) => () => {
+    const list = [...projectInfo.skills];
+    list.splice(index, 1);
+    setProjectInfo({ ...projectInfo, skills: list });
+  };
+
+  const handleThemeDelete = (index) => () => {
+    const list = [...projectInfo.themes];
+    list.splice(index, 1);
+    setProjectInfo({ ...projectInfo, themes: list });
+  };
   const handleAlignment = (event, newStatus) => {
     setProjectInfo({ ...projectInfo, status: newStatus });
   };
@@ -52,13 +68,30 @@ export const ProjectSettings = (props) => {
     setProjectInfo({ ...projectInfo, name: event.target.value });
   };
 
-  const handleLinkChange = (event, index) => {
+  const handleLinkNameChange = (event, index) => {
     const list = [...projectInfo.links];
-    list[index].linkName = event.target.value;
+    list[index].name = event.target.value;
     setProjectInfo({
       ...projectInfo,
       links: list,
     });
+  };
+
+  const handleLinkUrlChange = (event, index) => {
+    const list = [...projectInfo.links];
+    list[index].url = event.target.value;
+    setProjectInfo({
+      ...projectInfo,
+      links: list,
+    });
+  };
+
+  const handleSkillChange = () => {
+    setProjectInfo({
+      ...projectInfo,
+      skills: [...projectInfo.skills, skill],
+    });
+    setSkill("");
   };
 
   const handleLinkRemoveClick = (index) => {
@@ -81,8 +114,8 @@ export const ProjectSettings = (props) => {
 
   return (
     <Grid container className={classes.pageContentContainer}>
-      <Paper className={classes.paper} style={{ marginTop: "5rem" }}>
-        <Grid container style={{ width: "800px" }}>
+      <Paper className={classes.paper} style={{ marginTop: "2rem" }}>
+        <Grid container style={{ width: "1000px" }} spacing={3}>
           <Grid item container xs={6}>
             <Grid
               item
@@ -102,7 +135,6 @@ export const ProjectSettings = (props) => {
                 <TextField
                   id="filled-multiline-static"
                   label="Tittel"
-                  multiline
                   size="medium"
                   variant="outlined"
                   value={projectInfo.name}
@@ -145,54 +177,102 @@ export const ProjectSettings = (props) => {
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Grid>
+              <Grid item container xs={8} sm={8} direction="column">
+                <Grid item>
+                  <TextField
+                    id="filled-multiline-static"
+                    label="Legg til skill"
+                    size="small"
+                    variant="outlined"
+                    value={skill}
+                    //onInput={setSkill(event.target.value)}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" color="primary">
+                    Legg til
+                  </Button>
+                </Grid>
+              </Grid>
               <Grid item>
                 <h5>Skills</h5>
-                {project.skills &&
-                  project.skills.map((skill) => {
-                    return <Skill key={skill.id} skill={skill} />;
+                {projectInfo.skills !== null &&
+                  projectInfo.skills.map((skill, i) => {
+                    return (
+                      <Chip
+                        className={classes.skills}
+                        variant="outlined"
+                        color="primary"
+                        key={skill.name}
+                        label={skill.name}
+                        size="small"
+                        onDelete={handleSkillDelete(i)}
+                      />
+                    );
                   })}
               </Grid>
               <Grid item>
                 <h5>Temaer</h5>
-                {project.themes &&
-                  project.themes.map((theme) => {
-                    return <Skill key={theme.id} skill={theme} />;
+                {projectInfo.themes &&
+                  projectInfo.themes.map((theme, i) => {
+                    return (
+                      <Chip
+                        className={classes.skills}
+                        variant="outlined"
+                        color="primary"
+                        key={theme.name}
+                        label={theme.name}
+                        size="small"
+                        onDelete={handleThemeDelete(i)}
+                      />
+                    );
                   })}
               </Grid>
             </Grid>
           </Grid>
-          <Grid
-            item
-            container
-            xs={6}
-            direction="column"
-            justify="center"
-            alignItems="baseline"
-          >
+          <Grid item container xs={6} direction="column" alignItems="stretch">
             {projectInfo.links.map((x, i) => {
               return (
-                <Grid container justify="center" key={i}>
-                  <Grid item xs={10} sm={10}>
-                    <TextField
-                      label="Navn"
-                      value={x.name}
-                      onChange={(e) => handleLinkChange(e, i)}
-                    ></TextField>
-                    <TextField
-                      label="Lenke til prosjekt ressurs"
-                      value={x.url}
-                      onChange={(e) => handleLinkChange(e, i)}
-                    ></TextField>
-                    {projectInfo.links.length !== 1 && (
-                      <Icon
-                        className={classes.deleteIcon}
-                        path={mdiCloseThick}
-                        onClick={() => handleLinkRemoveClick(i)}
-                        variant="contained"
-                      >
-                        Slett
-                      </Icon>
-                    )}
+                <Grid container justify="center" direction="row" key={i}>
+                  <Grid container direction="column" item xs={10}>
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Navn"
+                        value={x.name}
+                        onChange={(e) => handleLinkNameChange(e, i)}
+                        fullWidth
+                      ></TextField>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField
+                        label="Lenke til prosjekt ressurs"
+                        value={x.url}
+                        fullWidth
+                        onChange={(e) => handleLinkUrlChange(e, i)}
+                      ></TextField>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    item
+                    xs={2}
+                  >
+                    <Grid item xs={2}>
+                      {projectInfo.links.length !== 1 && (
+                        <Icon
+                          className={classes.deleteIcon}
+                          path={mdiCloseThick}
+                          onClick={() => handleLinkRemoveClick(i)}
+                          variant="contained"
+                        >
+                          Slett
+                        </Icon>
+                      )}
+                    </Grid>
                   </Grid>
                   {projectInfo.links.length - 1 === i &&
                     projectInfo.links.length !== 5 && (
@@ -232,7 +312,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(8),
     paddingRight: theme.spacing(8),
   },
-
   deleteIcon: {
     paddingTop: theme.spacing(3),
     width: "1.5em",
@@ -240,6 +319,10 @@ const useStyles = makeStyles((theme) => ({
   // changes: {
   //   marginTop: theme.spacing(3),
   // },
+  skills: {
+    padding: theme.spacing(2),
+    marginLeft: theme.spacing(2),
+  },
   avatar: {
     minWidth: "6em",
     minHeight: "6em",

@@ -6,13 +6,13 @@ export const CreateProjectButton = () => {
 
   return (
     <Typography
-      variant="button"
-      color="inherit"
+      variant="contained"
+      color="primary"
       onClick={() => {
         history.push("/create-project");
       }}
     >
-      LagAlt
+      Opprett et nytt prosjekt
     </Typography>
   );
 };

@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import { projectsOverviewFetchAction } from "../../store/actions/projectsOverviewActions";
 import { ProjectsOverviewSearch } from "./ProjectsOverviewSearch";
 import { ProjectsOverviewIndustries } from "./ProjectsOverviewIndustries";
-
+import { CreateProjectButton } from "../Shared/CreateProjectButton";
 export const ProjectsOverview = () => {
   const history = useHistory();
 
@@ -26,6 +26,10 @@ export const ProjectsOverview = () => {
   );
   const classes = useStyles();
 
+  const handleCreateProject = (event) => {
+    event.preventDefault();
+    history.push("/create-project");
+  };
   useEffect(() => {
     dispatch(projectsOverviewFetchAction());
   }, []);
@@ -34,9 +38,8 @@ export const ProjectsOverview = () => {
     <div>
       <Container maxWidth="xl">
         {error && <p>{error}</p>}
-        {fetching && <p>Getting projects...</p>}
         <Grid container justify="center" alignContent="center" spacing={0}>
-          <Grid item container xs={9} md={9} spacing={2}>
+          <Grid item container xs={8} md={8} spacing={2}>
             <Grid item xs={11} md={11}>
               <Paper className={classes.paper}>
                 <ProjectsOverviewIndustries />
@@ -47,17 +50,24 @@ export const ProjectsOverview = () => {
             </Grid>
           </Grid>
 
-          <Grid item container direction="column" xs={3} md={3}>
-            <Grid item xs={10}>
+          <Grid item container direction="column" xs={4} md={4}>
+            <Grid item xs={11}>
               <Paper className={classes.paper}>
                 <ProjectsOverviewSearch />
               </Paper>
               <Paper className={classes.paper}>
-                <Button variant="contained">Opprett et nytt prosjekt</Button>
+                <CreateProjectButton></CreateProjectButton>
+                {/* <Button
+                  variant="contained"
+                  onClick={(event) => handleCreateProject(event)}
+                >
+                  Opprett et nytt prosjekt
+                </Button> */}
               </Paper>
             </Grid>
           </Grid>
         </Grid>
+        {fetching && <p>Getting projects...</p>}
       </Container>
     </div>
   );

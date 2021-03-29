@@ -30,7 +30,7 @@ export const ProjectsOverviewSearch = () => {
   };
 
   return (
-    <Grid container justify="center" alignItems="stretch">
+    <Grid container alignItems="stretch">
       <Grid item xs={12}>
         <TextField
           InputProps={{

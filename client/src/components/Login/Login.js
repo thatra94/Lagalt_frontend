@@ -13,7 +13,7 @@ export function Login() {
 
   useEffect(() => {
     // make useffect only render if authenticated is changed and not on mount
-    if (didMount.current) {
+    if (didMount.current && keycloak.subject !== undefined) {
       console.log(keycloak.token);
       setUser();
     } else didMount.current = true;
@@ -57,4 +57,3 @@ export function Login() {
     </div>
   );
 }
-//({keycloak.tokenParsed.preferred_username})

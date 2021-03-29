@@ -21,16 +21,16 @@ export const ProjectSidebar = ({ project }) => {
   );
 
   const renderProjectApplicationButton = () => {
+    if (user.id == project.userId) {     
+      return false;
+    }
     if (projectApplications) {
       return !projectApplications.find((app) => {
         if (app.userId == user.id) {
           return true;
         }
       });
-    }
-    if (user.id == project.userId) {
-      return false;
-    }
+    }     
     return true;
   };
 

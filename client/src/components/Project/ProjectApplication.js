@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 export const ProjectApplication = () => {
   const { project } = useSelector((state) => state.projectReducer);
   const { user } = useSelector((state) => state.userReducer);
+  const [applied, setApplied] = useState(false);
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
@@ -28,11 +30,12 @@ export const ProjectApplication = () => {
       })
     );
     setOpen(false);
+    setApplied(true)
   };
 
   return (
     <>
-      {user.id ? ((user.id && project.id && (
+      {(user.id && !applied) ? ((user.id && project.id && (
         <Container>
           <Button
             fullWidth
@@ -49,7 +52,9 @@ export const ProjectApplication = () => {
             handleSubmit={handleSubmit}
           />
         </Container>
-      ))) : <h6>Logg inn for å søke på prosjektet</h6>}
+      ))) : null}
+      {(!user.id && (<h6>Logg inn for å søke på prosjektet</h6>))}
+      {applied && ( <h6>Søknad sendt</h6>)}
     </>
   );
 };

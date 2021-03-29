@@ -2,10 +2,10 @@ import {useSelector} from 'react-redux'
 import {ProjectUserCommentItem} from './ProjectUserCommentItem'
 export const ProjectUserCommentsList = () => {
     const { comment: comments } = useSelector((state) => state.commentReducer);
-    console.log(comments)
+    const commentOrder = [...comments].reverse();
     return (
         <div>
-            {comments && comments.map((comment) => {
+            {commentOrder && commentOrder.map((comment) => {
                 return (<ProjectUserCommentItem comment={comment}/>)
             })}
         </div>

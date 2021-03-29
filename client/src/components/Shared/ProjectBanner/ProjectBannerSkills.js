@@ -28,7 +28,11 @@ export function ProjectBannerSkills({ skills }) {
     return (
       <>
         {skillsChips}
-        {<Typography variant="subtitle1" className={classes.matchesText}>{matches} Skills Matched</Typography>}
+        {matches > 0 ? (
+          <Typography variant="subtitle1" className={classes.matchesText}>
+            {matches} Skills Matched
+          </Typography>
+        ) : null}
       </>
     );
   };
@@ -58,6 +62,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   matchesText: {
-      marginLeft: theme.spacing(2)
-  }
+    marginLeft: theme.spacing(2),
+  },
 }));

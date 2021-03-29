@@ -17,6 +17,7 @@ export const ProjectApplicationDialog = (props) => {
       setMotivationText(event.target.value);
         console.log(motivationText)
     }; 
+    
   return (
     <div>
       <Dialog

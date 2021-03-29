@@ -29,12 +29,15 @@ export function commentReducer(state = initialState, action) {
                 comment: action.payload
             }
 
+        
+
         case ACTION_COMMENT_ADD:
             return {
                 ...state,
                 fetching: true,
                 error: ''
             }
+
         case ACTION_COMMENT_ADD_SUCCESS:
             return {
                 comment: [...state.comment,action.payload],

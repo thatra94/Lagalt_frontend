@@ -32,7 +32,6 @@ export const fetchCommentsByProjectId = (projectId) => {
     .then((response) => response.data);
 };
 
-
 export const fetchApplicationsByProjectId = (projectId) => {
   console.log('\n fetchApplicationsByProjectId \n');
   return fetch(`${API_BASE_URL}/ProjectApplications/${projectId}`)
@@ -52,4 +51,15 @@ export const postApplication = (application) => {
   })
     .then((res) => res.json())
     .then((res) => res.data);
+};
+
+export const putApplication = (application) => {
+  return fetch(`${API_BASE_URL}/ProjectApplications`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(application),
+  }).then((res) => res.json())
+    .then((res) => res.data).then((res) => console.log(res));
 };

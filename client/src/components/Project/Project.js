@@ -28,22 +28,25 @@ export const Project = (props) => {
       {error && <p>{error}</p>}
       {project && (
         <Container className={classes.pageContentContainer} maxWidth="xl">
-          <Grid container justify="space-between" spacing={6}>
-            <Grid item xs={12} md={8}>
+          <Grid container  spacing={6}>
+          <Grid item container xs={12} md={8} spacing={2}>
+            <Grid item xs={12} >
               <Paper className={classes.paper}>
                 <ProjectMainContent project={project} />
               </Paper>
+            </Grid>
+            <Grid item xs={12} >
+              <Paper className={classes.paper}>
+                <ProjectComments project={project}></ProjectComments>
+              </Paper>
+            </Grid>
             </Grid>
             <Grid item xs={12} md={4}>
               <Paper className={classes.paper}>
                 <ProjectSidebar project={project} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={8}>
-              <Paper className={classes.paper}>
-                <ProjectComments project={project}></ProjectComments>
-              </Paper>
-            </Grid>
+            
           </Grid>
         </Container>
       )}

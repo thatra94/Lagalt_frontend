@@ -18,27 +18,36 @@ import { mdiCloseThick } from '@mdi/js';
 import Icon from '@mdi/react';
 import { projectUpdateAction } from '../../store/actions/projectActions';
 import { applicationsFetchingByIdAction } from '../../store/actions/applicationsActions';
+import { applicationsUpdateAction } from '../../store/actions/applicationsActions';
+import { useHistory } from "react-router-dom";
 
 export const ProjectApplications = (props) => {
   const classes = useStyles();
   const { project } = useSelector((state) => state.projectReducer);
-
-  useEffect(() => {
-    dispatch(applicationsFetchingByIdAction(project.id));
-  }, []);
-
+  let history = useHistory();
+  
   const dispatch = useDispatch();
   const { fetching, error, projectApplications } = useSelector(
     (state) => state.applicationsReducer
   );
 
-  const handleAccept = () => {
+  useEffect(() => {
+    dispatch(applicationsFetchingByIdAction(project.id));
+  }, []);
+
+  const handleAccept = (app) => {
+     dispatch(applicationsUpdateAction({projectId: project.id, userId: app.userId,status: 'approved'}))
+  }
+
+  const handleDecline = (app) => {
+     dispatch(applicationsUpdateAction({projectId: project.id, userId: app.userId,status: 'declined'}))
 
   }
 
-  const handleDecline = () => {
-      
-  }
+  const userOnclick = (id) => (event) => {
+    event.preventDefault();
+    history.push(`/users/${id}`);
+  };
 
   return (
     <Grid container className={classes.pageContentContainer}>
@@ -47,21 +56,23 @@ export const ProjectApplications = (props) => {
           <h2>Prosjekt Søknader</h2>
 
           <List style={{ padding: 0, width: '100%' }}>
-            {projectApplications
-              ? projectApplications.map((application) => (
-                  <ListItem  divider key={application.userId}>
-                              <ListItemText
-                              primary={application.userName}
-                              secondary="outlined jada jeg vil være med er du  greiined jada jeg vil være med er du  greiined jada jeg vil være med er du  greiined jada jeg vil være med er du  grei. "
 
-                              />
 
-                    <div>
-                    <Button onClick={() => handleDecline()} variant="outlined" color="secondary">Avslå</Button>
-                    <Button onClick={() => handleAccept()} variant="contained" color="primary">Aksepter</Button></div>
-                  </ListItem>
-                ))
-              : null}  
+            {projectApplications ? projectApplications.map((application) => (
+                <ListItem button divider key={application.userId}>
+                            <ListItemText
+                            
+                            onClick={userOnclick(application.userId)}
+                            primary={application.userName}
+                            secondary={application.motivationText}
+
+                            />
+
+                  <div>
+                  <Button onClick={() => handleDecline(application)} variant="outlined" color="secondary">Avslå</Button>
+                  <Button onClick={() => handleAccept(application)} variant="contained" color="primary">Aksepter</Button></div>
+                </ListItem>
+              )): null}  
           </List>
         </Grid>
       </Paper>

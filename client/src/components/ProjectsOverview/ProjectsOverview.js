@@ -14,6 +14,7 @@ export const ProjectsOverview = () => {
     (state) => state.projectsOverviewReducer
   );
   const classes = useStyles();
+  const { user } = useSelector((state) => state.userReducer);
 
   const handleCreateProject = (event) => {
     event.preventDefault();
@@ -45,12 +46,16 @@ export const ProjectsOverview = () => {
                 <ProjectsOverviewSearch />
               </Paper>
               <Paper className={classes.paper}>
-                <Button
-                  variant="contained"
-                  onClick={(event) => handleCreateProject(event)}
-                >
-                  Opprett et nytt prosjekt
-                </Button>
+                {!user.id && <h6>Logg inn for å opprette et prosjekt</h6>}
+
+                {user.id !== 0 && (
+                  <Button
+                    variant="contained"
+                    onClick={(event) => handleCreateProject(event)}
+                  >
+                    Opprett et nytt prosjekt
+                  </Button>
+                )}
               </Paper>
             </Grid>
           </Grid>

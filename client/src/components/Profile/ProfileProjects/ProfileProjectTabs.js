@@ -1,16 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
+import { makeStyles } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import { Box, Paper, Button, Container } from "@material-ui/core";
-import { ProfileProjectsTabPersonalProjects } from "./ProfileProjectsTabPersonalProjects";
-import { ProfileProjectsTabPersonalAddButton } from "./ProfileProjectsTabPersonalAddButton";
+import Tabs from "@material-ui/core/Tabs";
+import PropTypes from "prop-types";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import { ProjectBanners } from "../../Shared/ProjectBanner/ProjectsBanners";
-import { ProfileHiddenToggle } from "../ProfileHiddenToggle";
-import { useDispatch, useSelector } from "react-redux";
+import { ProfileProjectsTabPersonalAddButton } from "./ProfileProjectsTabPersonalAddButton";
+import { ProfileProjectsTabPersonalProjects } from "./ProfileProjectsTabPersonalProjects";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -46,6 +45,7 @@ export function ProfileProjectTabs(projects) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const location = useLocation();
 
   return (
     <div className={classes.root}>
@@ -71,6 +71,9 @@ export function ProfileProjectTabs(projects) {
           <ProfileProjectsTabPersonalProjects
             personalProjects={projects.personalProjects}
           ></ProfileProjectsTabPersonalProjects>
+        )}
+        {location.pathname === "/profile" && (
+          <ProfileProjectsTabPersonalAddButton></ProfileProjectsTabPersonalAddButton>
         )}
       </TabPanel>
     </div>

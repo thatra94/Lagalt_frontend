@@ -1,48 +1,67 @@
 import {
-  Container,
-  Grid,
-  Button,
-  TextField,
   Avatar,
-  Paper,
-  Box,
+  Button,
   Chip,
+  Grid,
+  InputLabel,
+  Paper,
+  Select,
+  TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import { mdiCloseThick } from "@mdi/js";
 import Icon from "@mdi/react";
-import { projectUpdateAction } from "../../store/actions/projectActions";
-import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
-import { Skill } from "../Shared/Skill";
-import DoneIcon from "@material-ui/icons/Done";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import {
+  projectCreateAction,
+  projectUpdateAction,
+} from "../../store/actions/projectActions";
 
 export const ProjectSettings = (props) => {
   const { project } = useSelector((state) => state.projectReducer);
+  const { user } = useSelector((state) => state.userReducer);
+  const { industries } = useSelector((state) => state.industriesReducer);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const didMount = useRef(false);
 
   const [projectInfo, setProjectInfo] = useState({
     name: "",
     description: "",
-    industry: "",
+    industryId: 1,
     status: "Opprettet",
+    userId: 0,
     skills: [],
     themes: [],
-    links: [{ name: "", url: "" }],
+    links: [],
   });
 
   const [skill, setSkill] = useState("");
+  const [theme, setTheme] = useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const location = useLocation();
+  console.log(location.pathname);
 
-  console.log(projectInfo);
-
+  console.log(props);
   useEffect(() => {
-    if (project !== null) {
-      setProjectInfo(project);
+    if (projectInfo.userId === 0) {
+      setProjectInfo({ ...projectInfo, userId: user.id });
+    }
+    if (props.project) {
+      setProjectInfo(props.project);
     }
   }, []);
+
+  useEffect(() => {
+    if (didMount.current && project !== null) {
+      history.push(`/project/${project.id}`);
+    } else didMount.current = true;
+  }, [project]);
 
   const handleSkillDelete = (index) => () => {
     const list = [...projectInfo.skills];
@@ -50,10 +69,34 @@ export const ProjectSettings = (props) => {
     setProjectInfo({ ...projectInfo, skills: list });
   };
 
+  const handleSkillChange = (event) => {
+    event.preventDefault();
+    setSkill(event.target.value);
+  };
+
+  const handleThemeChange = (event) => {
+    event.preventDefault();
+    setTheme(event.target.value);
+  };
   const handleThemeDelete = (index) => () => {
     const list = [...projectInfo.themes];
     list.splice(index, 1);
     setProjectInfo({ ...projectInfo, themes: list });
+  };
+
+  const handleThemeAdd = () => {
+    setProjectInfo({
+      ...projectInfo,
+      themes: [...projectInfo.themes, { name: theme }],
+    });
+    setTheme("");
+  };
+  const handleSkillAdd = () => {
+    setProjectInfo({
+      ...projectInfo,
+      skills: [...projectInfo.skills, { name: skill }],
+    });
+    setSkill("");
   };
   const handleAlignment = (event, newStatus) => {
     setProjectInfo({ ...projectInfo, status: newStatus });
@@ -86,12 +129,11 @@ export const ProjectSettings = (props) => {
     });
   };
 
-  const handleSkillChange = () => {
+  const handleIndustryChange = (event) => {
     setProjectInfo({
       ...projectInfo,
-      skills: [...projectInfo.skills, skill],
+      industryId: event.target.value,
     });
-    setSkill("");
   };
 
   const handleLinkRemoveClick = (index) => {
@@ -108,15 +150,36 @@ export const ProjectSettings = (props) => {
   };
 
   const handleSaveChanges = () => {
-    console.log("updating");
-    dispatch(projectUpdateAction(projectInfo));
+    if (projectInfo.title === "") {
+      setTitleError(true);
+    }
+    if (projectInfo.description === "") {
+      setDescriptionError(true);
+    } else {
+      dispatch(projectUpdateAction(projectInfo));
+      setTitleError(false);
+      setDescriptionError(false);
+    }
+  };
+
+  const handleCreateProject = () => {
+    if (projectInfo.name === "") {
+      setTitleError(true);
+    }
+    if (projectInfo.description === "") {
+      setDescriptionError(true);
+    } else {
+      dispatch(projectCreateAction(projectInfo));
+      setTitleError(false);
+      setDescriptionError(false);
+    }
   };
 
   return (
     <Grid container className={classes.pageContentContainer}>
       <Paper className={classes.paper} style={{ marginTop: "2rem" }}>
-        <Grid container style={{ width: "1000px" }} spacing={3}>
-          <Grid item container xs={6}>
+        <Grid container style={{ width: "1000px" }} spacing={5}>
+          <Grid item container xs={6} spacing={5}>
             <Grid
               item
               container
@@ -133,24 +196,42 @@ export const ProjectSettings = (props) => {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <TextField
-                  id="filled-multiline-static"
                   label="Tittel"
                   size="medium"
                   variant="outlined"
                   value={projectInfo.name}
+                  error={titleError}
                   onInput={handleTitleChange}
                   fullWidth
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
+                <InputLabel htmlFor="outlined-age-native-simple">
+                  Industri
+                </InputLabel>
+                <Select
+                  native
+                  value={projectInfo.industryId}
+                  onChange={handleIndustryChange}
+                  label="Industri"
+                >
+                  {industries &&
+                    industries.map((industry) => (
+                      <option value={industry.id} key={industry.id}>
+                        {industry.name}
+                      </option>
+                    ))}
+                </Select>
+              </Grid>
+              <Grid item xs={12} sm={12}>
                 <TextField
-                  id="filled-multiline-static"
                   label="Beskrivelse"
                   multiline
                   size="medium"
                   rows={6}
                   variant="outlined"
                   value={projectInfo.description}
+                  error={descriptionError}
                   onInput={handleDescriptionChange}
                   fullWidth
                 />
@@ -177,118 +258,139 @@ export const ProjectSettings = (props) => {
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Grid>
-              <Grid item container xs={8} sm={8} direction="column">
-                <Grid item>
-                  <TextField
-                    id="filled-multiline-static"
-                    label="Legg til skill"
-                    size="small"
-                    variant="outlined"
-                    value={skill}
-                    //onInput={setSkill(event.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item>
-                  <Button variant="contained" color="primary">
-                    Legg til
-                  </Button>
-                </Grid>
-              </Grid>
-              <Grid item>
-                <h5>Skills</h5>
-                {projectInfo.skills !== null &&
-                  projectInfo.skills.map((skill, i) => {
-                    return (
-                      <Chip
-                        className={classes.skills}
-                        variant="outlined"
-                        color="primary"
-                        key={skill.name}
-                        label={skill.name}
-                        size="small"
-                        onDelete={handleSkillDelete(i)}
-                      />
-                    );
-                  })}
-              </Grid>
-              <Grid item>
-                <h5>Temaer</h5>
-                {projectInfo.themes &&
-                  projectInfo.themes.map((theme, i) => {
-                    return (
-                      <Chip
-                        className={classes.skills}
-                        variant="outlined"
-                        color="primary"
-                        key={theme.name}
-                        label={theme.name}
-                        size="small"
-                        onDelete={handleThemeDelete(i)}
-                      />
-                    );
-                  })}
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item container xs={6} direction="column" alignItems="stretch">
-            {projectInfo.links.map((x, i) => {
-              return (
-                <Grid container justify="center" direction="row" key={i}>
-                  <Grid container direction="column" item xs={10}>
-                    <Grid item xs={12}>
-                      <TextField
-                        label="Navn"
-                        value={x.name}
-                        onChange={(e) => handleLinkNameChange(e, i)}
-                        fullWidth
-                      ></TextField>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        label="Lenke til prosjekt ressurs"
-                        value={x.url}
-                        fullWidth
-                        onChange={(e) => handleLinkUrlChange(e, i)}
-                      ></TextField>
-                    </Grid>
-                  </Grid>
-                  <Grid
-                    container
-                    direction="column"
-                    alignItems="center"
-                    justify="center"
-                    item
-                    xs={2}
-                  >
-                    <Grid item xs={2}>
-                      {projectInfo.links.length !== 1 && (
-                        <Icon
-                          className={classes.deleteIcon}
-                          path={mdiCloseThick}
-                          onClick={() => handleLinkRemoveClick(i)}
-                          variant="contained"
-                        >
-                          Slett
-                        </Icon>
-                      )}
-                    </Grid>
-                  </Grid>
-                  {projectInfo.links.length - 1 === i &&
-                    projectInfo.links.length !== 5 && (
-                      <Grid item>
-                        <Button
-                          onClick={handleAddLinkClick}
-                          variant="contained"
-                          style={{ marginTop: "1em" }}
-                        >
-                          Legg til lenke
-                        </Button>
+              {projectInfo.links.map((x, i) => {
+                return (
+                  <Grid container justify="center" direction="row" key={i}>
+                    <Grid container direction="column" item xs={10} spacing={5}>
+                      <Grid item xs={12}>
+                        <TextField
+                          label="Navn"
+                          value={x.name}
+                          onChange={(e) => handleLinkNameChange(e, i)}
+                          fullWidth
+                        ></TextField>
+
+                        <TextField
+                          label="Lenke til prosjekt ressurs"
+                          value={x.url}
+                          fullWidth
+                          onChange={(e) => handleLinkUrlChange(e, i)}
+                        ></TextField>
                       </Grid>
-                    )}
-                </Grid>
-              );
-            })}
+                    </Grid>
+                    <Grid
+                      container
+                      direction="column"
+                      alignItems="center"
+                      justify="center"
+                      item
+                      xs={2}
+                    >
+                      <Grid item xs={2}>
+                        {projectInfo.links && (
+                          <Icon
+                            className={classes.deleteIcon}
+                            path={mdiCloseThick}
+                            onClick={() => handleLinkRemoveClick(i)}
+                            variant="contained"
+                          >
+                            Slett
+                          </Icon>
+                        )}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                );
+              })}
+            </Grid>
+            {projectInfo.links && projectInfo.links.length !== 5 && (
+              <Grid item container alignItems="center" justify="center">
+                <Button
+                  onClick={handleAddLinkClick}
+                  variant="contained"
+                  style={{ marginTop: "1em" }}
+                >
+                  Legg til lenke
+                </Button>
+              </Grid>
+            )}
+          </Grid>
+          <Grid
+            item
+            container
+            xs={6}
+            direction="row"
+            alignItems="center"
+            justify="flex-start"
+            spacing={1}
+          >
+            <Grid item xs={12}>
+              <h5>Skills</h5>
+              {projectInfo.skills !== null &&
+                projectInfo.skills.map((skill, i) => {
+                  return (
+                    <Chip
+                      className={classes.skills}
+                      variant="outlined"
+                      color="primary"
+                      key={skill.name}
+                      label={skill.name}
+                      size="small"
+                      onDelete={handleSkillDelete(i)}
+                    />
+                  );
+                })}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Legg til skill"
+                size="small"
+                variant="outlined"
+                value={skill}
+                onInput={handleSkillChange}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSkillAdd}
+              >
+                Legg til
+              </Button>
+            </Grid>
+
+            <Grid item xs={12}>
+              <h5>Temaer</h5>
+              {projectInfo.themes &&
+                projectInfo.themes.map((theme, i) => {
+                  return (
+                    <Chip
+                      className={classes.skills}
+                      variant="outlined"
+                      color="primary"
+                      key={theme.name}
+                      label={theme.name}
+                      size="small"
+                      onDelete={handleThemeDelete(i)}
+                    />
+                  );
+                })}
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="Legg til tema"
+                size="small"
+                variant="outlined"
+                value={theme}
+                onInput={handleThemeChange}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleThemeAdd}
+              >
+                Legg til
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Paper>
@@ -299,9 +401,24 @@ export const ProjectSettings = (props) => {
         alignItems="center"
         style={{ marginTop: "1em" }}
       >
-        <Button variant="contained" color="primary" onClick={handleSaveChanges}>
-          Lagre endringer
-        </Button>
+        {location.pathname !== "/create-project" && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSaveChanges}
+          >
+            Lagre endringer
+          </Button>
+        )}
+        {location.pathname === "/create-project" && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleCreateProject}
+          >
+            Opprett prosjekt
+          </Button>
+        )}
       </Grid>
     </Grid>
   );
@@ -316,9 +433,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3),
     width: "1.5em",
   },
-  // changes: {
-  //   marginTop: theme.spacing(3),
-  // },
+
   skills: {
     padding: theme.spacing(2),
     marginLeft: theme.spacing(2),

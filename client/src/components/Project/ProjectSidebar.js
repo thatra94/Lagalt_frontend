@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { Container, Divider, List } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { projectFetchingByIdAction } from "../../store/actions/projectActions";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
 import { ProjectApplication } from "./ProjectApplication";
 import { ProjectSettingsButton } from "./ProjectSettingsButton";
@@ -10,6 +9,7 @@ import { applicationsFetchingByIdAction } from '../../store/actions/applications
 
 export const ProjectSidebar = ({ project }) => {
   let history = useHistory();
+  const { user } = useSelector((state) => state.userReducer);
 
 
   useEffect(() => {
@@ -51,8 +51,9 @@ export const ProjectSidebar = ({ project }) => {
       <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
       <br />
       {renderProjectApplicationButton() ? <ProjectApplication /> : null}
-      
-      <ProjectSettingsButton project={project} />
+      {project.userId === user.id && (
+        <ProjectSettingsButton project={project} />
+      )}
       <h5>Prosjekt Medlemmer</h5>
       <List>
         {project.users &&

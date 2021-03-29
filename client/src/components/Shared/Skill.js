@@ -1,16 +1,18 @@
-import { Chip, makeStyles, Container } from "@material-ui/core";
+import { Chip, makeStyles } from "@material-ui/core";
 
 export function Skill({ skill }) {
   const classes = useStyles();
   return (
-    <Chip
-      className={classes.skills}
-      variant="outlined"
-      color="primary"
-      key={skill.name}
-      label={skill.name}
-      size="small"
-    />
+    <div className={classes.tagsContainer}>
+      <Chip
+        className={classes.skills}
+        variant="outlined"
+        color="primary"
+        key={skill.name}
+        label={skill.name}
+        size="small"
+      />
+    </div>
   );
 }
 

@@ -1,8 +1,8 @@
-import { useEffect, useRef } from "react";
-import { userSetByUserIdAction } from "../../store/actions/userActions";
 import { Button } from "@material-ui/core";
 import { useKeycloak } from "@react-keycloak/web";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { userSetByUserIdAction } from "../../store/actions/userActions";
 import { postUser } from "./LoginAPI";
 
 export function Login() {

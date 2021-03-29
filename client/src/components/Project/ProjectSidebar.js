@@ -17,7 +17,7 @@ export const ProjectSidebar = ({ project }) => {
       <br />
       <ProjectApplication />
       <ProjectSettingsButton project={project} />
-      <h5>Prosjekt Medlemmer</h5>{" "}
+      <h5>Prosjekt Medlemmer</h5>
       <List>
         {project.users &&
           project.users.map((user) => (

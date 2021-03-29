@@ -6,6 +6,8 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { ProjectSettings } from "../ProjectSettings/ProjectSettings";
+import {ProjectApplications} from "../ProjectApplications/ProjectApplications"
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -72,7 +74,7 @@ export function ProjectAdministration() {
         <ProjectSettings></ProjectSettings>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Medlemsforespørsler
+      <ProjectApplications/>
       </TabPanel>
     </div>
   );

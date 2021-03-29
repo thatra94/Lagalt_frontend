@@ -18,7 +18,6 @@ export const ProjectsOverviewIndustries = () => {
     );
 
     const handleIndustryClicked = (industry) => {
-        console.log("helo",industry)
         dispatch(projectsOverviewFetchByIndustryAction(industry));
     }
 

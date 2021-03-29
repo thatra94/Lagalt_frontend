@@ -12,7 +12,6 @@ export const ProjectBannerTags = ({ project }) => {
             key={project.industryName}
             label={project.industryName}
             size="small"
-            borderRadius={0}
           />
           {project.themes &&
             project.themes.map((theme) => {
@@ -22,7 +21,6 @@ export const ProjectBannerTags = ({ project }) => {
                   key={theme.name}
                   label={theme.name}
                   size="small"
-                  borderRadius={0}
                 />
               );
             })}

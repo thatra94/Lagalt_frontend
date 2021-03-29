@@ -6,7 +6,8 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { ProjectSettings } from "../ProjectSettings/ProjectSettings";
-import {ProjectApplications} from "../ProjectApplications/ProjectApplications"
+import { ProjectApplications } from "../ProjectApplications/ProjectApplications";
+import { useDispatch, useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 export function ProjectAdministration() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const { project } = useSelector((state) => state.projectReducer);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -71,10 +73,10 @@ export function ProjectAdministration() {
         <Tab label="Medlemforespørsler" {...a11yProps(1)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <ProjectSettings></ProjectSettings>
+        <ProjectSettings project={project}></ProjectSettings>
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <ProjectApplications/>
+        <ProjectApplications />
       </TabPanel>
     </div>
   );

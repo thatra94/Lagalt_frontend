@@ -1,33 +1,28 @@
-import { useKeycloak } from "@react-keycloak/web";
-import { Navbar } from "../Shared/Navbar/Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import Switch from "@material-ui/core/Switch";
-
-import { useParams, useHistory } from "react-router-dom";
 import {
+  Avatar,
+  Button,
   Container,
   Grid,
-  Button,
-  TextField,
   Paper,
-  Avatar,
+  TextField,
 } from "@material-ui/core";
-import { ProfileProjects } from "./ProfileProjects/ProfileProjects";
-import { useState, useEffect } from "react";
-import { ProfileSkills } from "./ProfileSkills";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  userProjectsFetchingByUserIdAction,
-  userPersonalProjectsFetchingByUserIdAction,
-} from "../../store/actions/userProjectsActions";
-import { ProfileHiddenToggle } from "./ProfileHiddenToggle";
+import Switch from "@material-ui/core/Switch";
+import { useKeycloak } from "@react-keycloak/web";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { userUpdateAction } from "../../store/actions/userActions";
+import {
+  userPersonalProjectsFetchingByUserIdAction,
+  userProjectsFetchingByUserIdAction,
+} from "../../store/actions/userProjectsActions";
+import { ProfileProjects } from "./ProfileProjects/ProfileProjects";
+import { ProfileSkills } from "./ProfileSkills";
 
 export function Profile() {
   const { keycloak } = useKeycloak();
   const dispatch = useDispatch();
   const { error, user } = useSelector((state) => state.userReducer);
-  console.log(user);
   const Classes = useStyles();
   const [skill, setSkill] = useState("");
   const [skillList, setSkillList] = useState([]);
@@ -48,7 +43,7 @@ export function Profile() {
     if (user.hidden != null) {
       setHidden(user.hidden);
     }
-    dispatch(userProjectsFetchingByUserIdAction("example-token"));
+    dispatch(userProjectsFetchingByUserIdAction(keycloak.subject));
     dispatch(userPersonalProjectsFetchingByUserIdAction(keycloak.subject));
   }, []);
 
@@ -79,9 +74,6 @@ export function Profile() {
     dispatch(userUpdateAction(updatedUser));
   };
 
-  const handleDelete = () => {
-    console.log("delete");
-  };
   return (
     <div>
       <Container fixed>
@@ -197,9 +189,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "6em",
     minHeight: "6em",
   },
-  // profileContainer: {
-  //   box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.22);
-  // },
+
   paper: {
     padding: theme.spacing(2),
     margin: "auto",

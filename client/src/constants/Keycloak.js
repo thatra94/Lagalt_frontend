@@ -10,7 +10,7 @@ import Keycloak from "keycloak-js";
 // },
 // };
 
-//LocalClient
+// LocalClient
 const keycloakConfig = {
   url: "https://keycloakheroku.herokuapp.com/auth/",
   realm: "Lagalt",
@@ -28,10 +28,10 @@ const keycloakConfig = {
 //   realm: "Lagalt",
 //   clientId: "lagaltClient",
 //   "enable-cors": true,
-// initOptions: {
-//   onLoad: "check-sso",
-//   checkLoginIframe: false,
-// },
+//   initOptions: {
+//     onLoad: "check-sso",
+//     checkLoginIframe: false,
+//   },
 // };
 
 const keycloak = new Keycloak(keycloakConfig);

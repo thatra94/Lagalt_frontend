@@ -1,16 +1,8 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import {
-  List,
-  makeStyles,
-  Paper,
-  ListItem,
-  Grid,
-  Link,
-} from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { Grid, List, ListItem, makeStyles, Paper } from "@material-ui/core";
 import { mdiOpenInNew } from "@mdi/js";
 import Icon from "@mdi/react";
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 export function ProfileProjectsTabPersonalProjects(personalProjects) {
   const Classes = useStyles();

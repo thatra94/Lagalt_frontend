@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
 import { Container, Divider, List } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { projectFetchingByIdAction } from "../../store/actions/projectActions";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
 import { ProjectApplication } from "./ProjectApplication";
 import { ProjectSettingsButton } from "./ProjectSettingsButton";
-import { useHistory } from "react-router-dom";
 
 export const ProjectSidebar = ({ project }) => {
   let history = useHistory();
+  const { user } = useSelector((state) => state.userReducer);
 
   const userOnclick = (id) => (event) => {
     event.preventDefault();
@@ -23,8 +22,10 @@ export const ProjectSidebar = ({ project }) => {
       <p>Prosjekt Status: {project.status}</p>
       <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
       <br />
-      <ProjectApplication />
-      <ProjectSettingsButton project={project} />
+      {project.userId !== user.id && <ProjectApplication />}
+      {project.userId === user.id && (
+        <ProjectSettingsButton project={project} />
+      )}
       <h5>Prosjekt Medlemmer</h5>
       <List>
         {project.users &&

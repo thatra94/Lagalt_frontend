@@ -1,22 +1,11 @@
-import { Navbar } from "../Shared/Navbar/Navbar";
-import { ProjectBanners } from "../Shared/ProjectBanner/ProjectsBanners";
-import {
-  Container,
-  Button,
-  ButtonGroup,
-  Paper,
-  Grid,
-  Input,
-  makeStyles,
-  Box,
-} from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Container, Grid, makeStyles, Paper } from "@material-ui/core";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { projectsOverviewFetchAction } from "../../store/actions/projectsOverviewActions";
-import { ProjectsOverviewSearch } from "./ProjectsOverviewSearch";
+import { ProjectBanners } from "../Shared/ProjectBanner/ProjectsBanners";
 import { ProjectsOverviewIndustries } from "./ProjectsOverviewIndustries";
-import { CreateProjectButton } from "../Shared/CreateProjectButton";
+import { ProjectsOverviewSearch } from "./ProjectsOverviewSearch";
 export const ProjectsOverview = () => {
   const history = useHistory();
 
@@ -56,13 +45,12 @@ export const ProjectsOverview = () => {
                 <ProjectsOverviewSearch />
               </Paper>
               <Paper className={classes.paper}>
-                <CreateProjectButton></CreateProjectButton>
-                {/* <Button
+                <Button
                   variant="contained"
                   onClick={(event) => handleCreateProject(event)}
                 >
                   Opprett et nytt prosjekt
-                </Button> */}
+                </Button>
               </Paper>
             </Grid>
           </Grid>

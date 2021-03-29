@@ -1,6 +1,7 @@
 export const ACTION_PROJECT_FETCH_BY_ID = "project:FETCHING_BY_ID";
 export const ACTION_PROJECT_SET_BY_ID = "project:SET_BY_ID";
 export const ACTION_PROJECT_UPDATE = "project:UPDATE";
+export const ACTION_PROJECT_CREATE = "project:CREATE";
 export const ACTION_PROJECT_ERROR = "project:ERROR";
 
 export const projectFetchingByIdAction = (payload) => ({
@@ -15,6 +16,11 @@ export const projectSetByIdAction = (payload) => ({
 
 export const projectUpdateAction = (payload) => ({
   type: ACTION_PROJECT_UPDATE,
+  payload,
+});
+
+export const projectCreateAction = (payload) => ({
+  type: ACTION_PROJECT_CREATE,
   payload,
 });
 

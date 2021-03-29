@@ -1,11 +1,11 @@
-import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Typography";
 import { useHistory } from "react-router-dom";
 
 export const CreateProjectButton = () => {
   let history = useHistory();
 
   return (
-    <Typography
+    <Button
       variant="contained"
       color="primary"
       onClick={() => {
@@ -13,6 +13,6 @@ export const CreateProjectButton = () => {
       }}
     >
       Opprett et nytt prosjekt
-    </Typography>
+    </Button>
   );
 };

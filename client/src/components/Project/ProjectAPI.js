@@ -35,7 +35,7 @@ export const fetchCommentsByProjectId = (projectId) => {
 
 export const fetchApplicationsByProjectId = (projectId) => {
   console.log('\n fetchApplicationsByProjectId \n');
-  return fetch(`${API_BASE_URL}/ProjectApplications/${projectId}/comments`)
+  return fetch(`${API_BASE_URL}/ProjectApplications/${projectId}`)
     .then((response) => response.json())
     .then((response) => response.data);
 };

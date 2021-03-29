@@ -7,9 +7,10 @@ import {
 
 const initialState = {
   user: {
-    id: null,
+    id: 0,
     name: "",
     userId: "",
+    hidden: false,
     imageUrl: "",
     description: "",
     skills: [],

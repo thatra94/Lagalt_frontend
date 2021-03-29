@@ -39,10 +39,9 @@ function a11yProps(index) {
   };
 }
 
-export function ProfileProjectTabs() {
+export function ProfileProjectTabs(projects) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const { error, projects } = useSelector((state) => state.userProjectsReducer);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -59,15 +58,20 @@ export function ProfileProjectTabs() {
           centered
         >
           <Tab label="Lagalt" {...a11yProps(0)} />
-          <Tab label="Personal" {...a11yProps(1)} />
+          <Tab label="Personlige" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <ProjectBanners projects={projects} />
+        {projects.lagaltProjects && (
+          <ProjectBanners projects={projects.lagaltProjects} />
+        )}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProfileProjectsTabPersonalProjects></ProfileProjectsTabPersonalProjects>
-        <ProfileProjectsTabPersonalAddButton></ProfileProjectsTabPersonalAddButton>
+        {projects.personalProjects && (
+          <ProfileProjectsTabPersonalProjects
+            personalProjects={projects.personalProjects}
+          ></ProfileProjectsTabPersonalProjects>
+        )}
       </TabPanel>
     </div>
   );

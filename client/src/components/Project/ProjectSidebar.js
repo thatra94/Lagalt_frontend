@@ -1,16 +1,15 @@
 import { Container, Divider, List } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { applicationsFetchingByIdAction } from "../../store/actions/applicationsActions";
 import { ProjectBannerSkills } from "../Shared/ProjectBanner/ProjectBannerSkills";
 import { ProjectApplication } from "./ProjectApplication";
 import { ProjectSettingsButton } from "./ProjectSettingsButton";
-import { useHistory } from "react-router-dom";
-import { applicationsFetchingByIdAction } from '../../store/actions/applicationsActions';
 
 export const ProjectSidebar = ({ project }) => {
   let history = useHistory();
   const { user } = useSelector((state) => state.userReducer);
-
 
   useEffect(() => {
     dispatch(applicationsFetchingByIdAction(project.id));
@@ -20,20 +19,20 @@ export const ProjectSidebar = ({ project }) => {
   const { fetching, error, projectApplications } = useSelector(
     (state) => state.applicationsReducer
   );
-  
-  const { user } = useSelector((state) => state.userReducer);
 
   const renderProjectApplicationButton = () => {
-    if (projectApplications){
-      return !projectApplications.find(app => {
-        if (app.userId==user.id){
+    if (projectApplications) {
+      return !projectApplications.find((app) => {
+        if (app.userId == user.id) {
           return true;
         }
-      })
+      });
     }
-    if (user.id==project.userId){return false}
+    if (user.id == project.userId) {
+      return false;
+    }
     return true;
-  }
+  };
 
   const userOnclick = (id) => (event) => {
     event.preventDefault();
@@ -46,8 +45,8 @@ export const ProjectSidebar = ({ project }) => {
       <Divider />
       <h5>Prosjekt Admin: {project.userName} </h5>
       <h5>Prosjekt Status: {project.status}</h5>
-      <Divider/>
-      <div style={{marginBottom: "16px"}}></div>
+      <Divider />
+      <div style={{ marginBottom: "16px" }}></div>
       <ProjectBannerSkills skills={project.skills}></ProjectBannerSkills>
       <br />
       {renderProjectApplicationButton() ? <ProjectApplication /> : null}

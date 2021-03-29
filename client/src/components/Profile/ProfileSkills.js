@@ -1,7 +1,4 @@
-import { Chip, makeStyles, Container } from "@material-ui/core";
-import { Skill } from "../Shared/Skill";
-import { spacing } from "@material-ui/system";
-import DoneIcon from "@material-ui/icons/Done";
+import { Chip, makeStyles } from "@material-ui/core";
 
 export function ProfileSkills({ skills }) {
   const classes = useStyles();

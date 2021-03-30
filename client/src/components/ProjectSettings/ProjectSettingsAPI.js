@@ -17,7 +17,7 @@ export const putProject = (project) => {
 };
 
 export const postNewProject = (project, token) => {
-  return fetch(`${API_BASE_URL}/projects`, {
+  return fetch(`${API_BASE_URL}/projects/new`, {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/json",

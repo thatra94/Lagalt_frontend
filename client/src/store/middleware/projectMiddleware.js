@@ -1,4 +1,4 @@
-import { fetchProjectById } from "../../components/Project/ProjectAPI";
+import { fetchWithPostProjectById } from "../../components/Project/ProjectAPI";
 import {
   postNewProject,
   putProject,
@@ -15,7 +15,8 @@ export const projectMiddleware = ({ dispatch }) => (next) => (action) => {
   next(action);
 
   if (action.type === ACTION_PROJECT_FETCH_BY_ID) {
-    fetchProjectById(action.payload)
+    console.log(action.payload);
+    fetchWithPostProjectById(action.payload)
       .then((project) => {
         dispatch(projectSetByIdAction(project));
       })

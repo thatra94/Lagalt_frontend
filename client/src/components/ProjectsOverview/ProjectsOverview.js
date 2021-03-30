@@ -21,8 +21,8 @@ export const ProjectsOverview = () => {
     history.push("/create-project");
   };
   useEffect(() => {
-    dispatch(projectsOverviewFetchAction());
-  }, []);
+    dispatch(projectsOverviewFetchAction(user.id));
+  }, [user]);
 
   return (
     <div>

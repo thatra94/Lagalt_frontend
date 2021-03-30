@@ -1,10 +1,10 @@
-import { useHistory } from "react-router-dom";
 import {
+  Avatar,
   ListItem,
   ListItemAvatar,
   makeStyles,
-  Avatar,
 } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { ProjectBannerItemTopRow } from "./ProjectBannerItemTopRow";
 import { ProjectBannerSkills } from "./ProjectBannerSkills";
 
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     width: "100%",
   },
-  bannerMainContent : {
+  bannerMainContent: {
     marginLeft: theme.spacing(2),
     width: "100%",
   },

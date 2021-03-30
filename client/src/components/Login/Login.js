@@ -51,7 +51,7 @@ export function Login() {
           className="btn-link"
           onClick={() => keycloak.login()}
         >
-          Logg In
+          Logg Inn
         </Button>
       )}
     </div>

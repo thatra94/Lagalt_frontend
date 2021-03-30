@@ -1,15 +1,34 @@
 import { API_BASE_URL } from "../../constants/API";
 
-export const fetchProjectById = (projectId) => {
-  return fetch(`${API_BASE_URL}/projects/${projectId}`)
-    .then((res) => res.json())
-    .then((res) => res.data)
-    .then((project) => {
-      if (!project) {
-        throw new Error("Could not find project with id " + projectId);
+// export const fetchProjectById = (projectId) => {
+//   return fetch(`${API_BASE_URL}/projects/${projectId}`)
+//     .then((res) => res.json())
+//     .then((res) => res.data)
+//     .then((project) => {
+//       if (!project) {
+//         throw new Error("Could not find project with id " + projectId);
+//       }
+//       return project;
+//     });
+// };
+
+export const fetchWithPostProjectById = (data) => {
+  return fetch(`${API_BASE_URL}/projects/${data.projectId}`, {
+    method: "POST",
+    headers: new Headers({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${data.token}`,
+    }),
+    body: JSON.stringify({ Id: data.Id }),
+  })
+    .then(async (response) => {
+      if (!response.ok) {
+        const { error } = await response.json();
+        throw Error(error);
       }
-      return project;
-    });
+      return response.json();
+    })
+    .then((response) => response.data);
 };
 
 export const postComment = (comment) => {

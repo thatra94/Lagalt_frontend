@@ -1,17 +1,13 @@
 import {
   Button,
-  TextField,
-  Container,
   createStyles,
-  makeStyles,
-  Theme,
   Grid,
-  Paper,
+  makeStyles,
+  TextField,
 } from "@material-ui/core";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { projectsOverviewSearchAction } from "../../store/actions/projectsOverviewActions";
-import React from "react";
 
 export const ProjectsOverviewSearch = () => {
   const [search, setSearch] = useState("");
@@ -46,7 +42,7 @@ export const ProjectsOverviewSearch = () => {
           value={search}
         />
         <Button variant="contained" onClick={handleSearch}>
-          Search
+          Søk
         </Button>
       </Grid>
     </Grid>

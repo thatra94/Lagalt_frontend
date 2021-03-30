@@ -1,8 +1,7 @@
-import { makeStyles, Container, Typography } from '@material-ui/core';
-import { Skill } from '../Skill';
-import { SkillMatched } from '../SkillMatched';
-import { useSelector } from 'react-redux';
-import { useState, useRef } from 'react';
+import { Container, makeStyles, Typography } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { Skill } from "../Skill";
+import { SkillMatched } from "../SkillMatched";
 export function ProjectBannerSkills({ skills }) {
   const classes = useStyles();
 
@@ -30,7 +29,7 @@ export function ProjectBannerSkills({ skills }) {
         {skillsChips}
         {matches > 0 ? (
           <Typography variant="subtitle1" className={classes.matchesText}>
-            {matches} Skills Matched
+            {matches} Skills matchet
           </Typography>
         ) : null}
       </>
@@ -56,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: 0,
     margin: 0,
-    width: '100%',
-    alignItems: 'center',
-    display: 'flex',
-    flexWrap: 'wrap',
+    width: "100%",
+    alignItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
   },
   matchesText: {
     marginLeft: theme.spacing(2),

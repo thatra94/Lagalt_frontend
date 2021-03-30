@@ -22,7 +22,7 @@ const keycloakConfig = {
   },
 };
 
-// // Deployment
+// Deployment
 // const keycloakConfig = {
 //   url: "https://keycloakheroku.herokuapp.com/auth/",
 //   realm: "Lagalt",

@@ -31,6 +31,7 @@ export const ProjectSettings = (props) => {
 
   const [projectInfo, setProjectInfo] = useState({
     name: "",
+    imageUrl: "",
     description: "",
     industryId: 1,
     status: "Opprettet",
@@ -109,6 +110,11 @@ export const ProjectSettings = (props) => {
   const handleTitleChange = (event) => {
     event.preventDefault();
     setProjectInfo({ ...projectInfo, name: event.target.value });
+  };
+
+  const handleImageChange = (event) => {
+    event.preventDefault();
+    setProjectInfo({ ...projectInfo, imageUrl: event.target.value });
   };
 
   const handleLinkNameChange = (event, index) => {
@@ -192,6 +198,16 @@ export const ProjectSettings = (props) => {
                   className={classes.avatar}
                   alt={`img for ${projectInfo.name}`}
                   src={projectInfo.imageUrl}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  label="ImageUrl"
+                  size="medium"
+                  variant="outlined"
+                  value={projectInfo.imageUrl}
+                  onInput={handleImageChange}
+                  fullWidth
                 />
               </Grid>
               <Grid item xs={12} sm={12}>

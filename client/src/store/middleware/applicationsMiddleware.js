@@ -1,21 +1,17 @@
 import {
-  ACTION_APPLICATIONS_FETCH_BY_ID,
-  ACTION_APPLICATIONS_SET_BY_ID,
-  ACTION_APPLICATIONS_ADD,
-  ACTION_APPLICATIONS_ADD_SUCCESS,
-  ACTION_APPLICATIONS_ERROR,
-  applicationsErrorAction,
-  applicationsSetByIdAction,
-  applicationsAddAction,
-  applicationsUpdateSuccessAction,
-  applicationsAddSuccessAction,
-  ACTION_APPLICATIONS_UPDATE,
-} from '../actions/applicationsActions';
-import {
-  putApplication,
   fetchApplicationsByProjectId,
   postApplication,
-} from '../../components/Project/ProjectAPI';
+  putApplication,
+} from "../../components/Project/ProjectAPI";
+import {
+  ACTION_APPLICATIONS_ADD,
+  ACTION_APPLICATIONS_FETCH_BY_ID,
+  ACTION_APPLICATIONS_UPDATE,
+  applicationsAddSuccessAction,
+  applicationsErrorAction,
+  applicationsFetchingByIdAction,
+  applicationsSetByIdAction,
+} from "../actions/applicationsActions";
 
 export const applicationsMiddleware = ({ dispatch }) => (next) => (action) => {
   next(action);
@@ -43,7 +39,8 @@ export const applicationsMiddleware = ({ dispatch }) => (next) => (action) => {
   if (action.type === ACTION_APPLICATIONS_UPDATE) {
     putApplication(action.payload)
       .then((application) => {
-        dispatch(applicationsUpdateSuccessAction(application));
+        console.log(application);
+        dispatch(applicationsFetchingByIdAction(application.projectId));
       })
       .catch((error) => {
         dispatch(applicationsErrorAction(error.message));

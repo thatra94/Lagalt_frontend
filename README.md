@@ -1,4 +1,4 @@
-# Lagalt_frontend
+# Lagalt frontend client
 
 ##### Made by Thanh Tran, Elise Rishaug, Melfyn Jenkins, Jakob Ramstad
 

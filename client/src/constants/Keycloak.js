@@ -11,28 +11,28 @@ import Keycloak from "keycloak-js";
 // };
 
 // LocalClient
-// const keycloakConfig = {
-//   url: "https://keycloakheroku.herokuapp.com/auth/",
-//   realm: "Lagalt",
-//   clientId: "lagaltClientLocal",
-//   "enable-cors": true,
-//   initOptions: {
-//     onLoad: "check-sso",
-//     checkLoginIframe: false,
-//   },
-// };
-
-// Deployment
 const keycloakConfig = {
   url: "https://keycloakheroku.herokuapp.com/auth/",
   realm: "Lagalt",
-  clientId: "lagaltClient",
+  clientId: "lagaltClientLocal",
   "enable-cors": true,
   initOptions: {
     onLoad: "check-sso",
     checkLoginIframe: false,
   },
 };
+
+// // Deployment
+// const keycloakConfig = {
+//   url: "https://keycloakheroku.herokuapp.com/auth/",
+//   realm: "Lagalt",
+//   clientId: "lagaltClient",
+//   "enable-cors": true,
+//   initOptions: {
+//     onLoad: "check-sso",
+//     checkLoginIframe: false,
+//   },
+// };
 
 const keycloak = new Keycloak(keycloakConfig);
 export default keycloak;

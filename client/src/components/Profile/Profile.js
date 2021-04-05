@@ -28,6 +28,7 @@ export function Profile() {
   const [skillList, setSkillList] = useState([]);
   const [description, setDescription] = useState("");
   const [hidden, setHidden] = useState(false);
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(false);
 
   const toggleHidden = () => {
     setHidden((prev) => !prev);
@@ -67,6 +68,8 @@ export function Profile() {
     setDescription(event.target.value);
   };
   const saveChanges = () => {
+    setSaveButtonDisabled(true);
+    setTimeout(() => setSaveButtonDisabled(false), 1000);
     let updatedUser = user;
     updatedUser.description = description;
     updatedUser.skills = skillList;
@@ -166,6 +169,7 @@ export function Profile() {
                   variant="contained"
                   color="primary"
                   onClick={saveChanges}
+                  disabled={saveButtonDisabled}
                   className={Classes.changes}
                 >
                   Lagre endringer

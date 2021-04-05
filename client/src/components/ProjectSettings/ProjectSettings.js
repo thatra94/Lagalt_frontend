@@ -202,7 +202,7 @@ export const ProjectSettings = (props) => {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <TextField
-                  label="ImageUrl"
+                  label="Bilde link"
                   size="medium"
                   variant="outlined"
                   value={projectInfo.imageUrl}

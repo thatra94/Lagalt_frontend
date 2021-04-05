@@ -13,7 +13,7 @@ export function ProfileProjects() {
       {projects !== null && personalProjects !== null && (
         <>
           <ProfileProjectTabs
-            projects={projects}
+            lagaltProjects={projects}
             personalProjects={personalProjects}
           ></ProfileProjectTabs>
         </>
